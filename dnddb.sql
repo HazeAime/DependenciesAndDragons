@@ -15,11 +15,11 @@ create table `role` (
 );
 
 create table user_role (
-	userid int not null,
-    roleid int not null,
-    primary key (userid, roleid),
-    foreign key (userid) references user(id),
-    foreign key (roleid) references role(id)
+	userId int not null,
+    roleId int not null,
+    primary key (userId, roleId),
+    foreign key (userId) references user(id),
+    foreign key (roleId) references role(id)
 );
 
 create table characterClass (
@@ -132,20 +132,17 @@ create table character_attackOrSpell (
 		references attackOrSpell(id)
 	);
     
-insert into `user` (username, `password`, enabled)
-values
+insert into `user` (username, `password`, enabled) values
 	('Admin', 'password', 1),
     ('DM1', 'password', 1),
     ('Player1', 'password', 1);
     
-insert into `role` (`role`)
-values
+insert into `role` (`role`) values
 	('ROLE_ADMIN'),
     ('ROLE_DM'),
     ('ROLE_PLAYER');
     
-insert into user_role (userid, roleid)
-values
+insert into user_role (userId, roleId) values
 	(1, 1),
     (2, 2),
     (3, 3);
