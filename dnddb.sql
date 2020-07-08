@@ -22,6 +22,116 @@ create table user_role (
     foreign key (roleid) references role(id)
 );
 
+create table characterClass (
+	classId int primary key auto_increment,
+    className varchar(20) not null,
+    hitDie varchar(3) not null,
+    primaryAbility varchar(20) not null,
+    saves varchar(30) not null
+    );
+    
+create table item (
+	id int primary key auto_increment,
+    `name` varchar(20) not null,
+    `description` varchar(100)
+    );
+    
+create table skill (
+	id int primary key auto_increment,
+    `name` varchar(30) not null,
+    `description` varchar(100) not null
+    );
+    
+create table attackOrSpell (
+	id int primary key auto_increment,
+    `name` varchar(30) not null,
+    `description` varchar(30) not null,
+    damage int not null
+    );
+
+create table race (
+	id int primary key auto_increment,
+    `name` varchar(30) not null,
+    `description` varchar(100) not null
+    );
+    
+create table alignment (
+	id int primary key auto_increment,
+    `name` varchar(20) not null
+    );
+    
+create table dndCharacter (
+	id int primary key auto_increment,
+    characterName varchar(30) not null,
+    playerName varchar(30) not null,
+    alignmentId int not null,
+    xp int not null,
+    characterLvl int not null,
+    raceId int not null,
+    classId int not null,
+    strength int not null,
+    dexterity int not null,
+    constitution int not null,
+    intelligence int not null,
+    wisdom int not null,
+    charisma int not null,
+    stStrength int not null,
+    stDexterity int not null,
+	stConstitution int not null,
+    stIntelligence int not null,
+    stWisdom int not null,
+    stCharisma int not null,
+    money int not null,
+    backstory varchar(200),
+    hitDice int not null,
+    armorClass int not null,
+    foreign key (classId)
+		references characterClass(classId),
+	foreign key (alignmentId)
+		references alignment(id),
+	foreign key (raceId)
+		references race(id)
+    );
+    
+create table dndCampaign (
+	id int primary key auto_increment,
+    map varchar(100) not null,
+    `description` varchar(200) not null,
+    userid int not null,
+    foreign key (userid)
+		references `user`(id)
+    );
+    
+create table character_item (
+	characterId int not null,
+    itemId int not null,
+    primary key(characterId, itemId),
+    foreign key (characterId)
+		references dndCharacter(id),
+	foreign key (itemId)
+		references item(id)
+	);
+    
+create table character_skill (
+	characterId int not null,
+    skillId int not null,
+    primary key(characterId, skillId),
+    foreign key (characterId)
+		references dndCharacter(id),
+	foreign key (skillId)
+		references skill(id)
+	);
+    
+create table character_attackOrSpell (
+	characterId int not null,
+    attackOrSpellId int not null,
+    primary key(characterId, attackOrSpellId),
+    foreign key (characterId)
+		references dndCharacter(id),
+	foreign key (attackOrSpellId)
+		references attackOrSpell(id)
+	);
+    
 insert into `user` (username, `password`, enabled)
 values
 	('Admin', 'password', 1),
