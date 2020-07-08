@@ -10,94 +10,63 @@ import java.util.Set;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 public class User {
-    
     private int id;
     private String userName;
     private String password;
     private boolean enabled;
     private Set<Role> roles;
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the userName
-     */
     public String getUserName() {
         return userName;
     }
 
-    /**
-     * @param userName the userName to set
-     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    /**
-     * @return the password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password the password to set
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return the enabled
-     */
     public boolean isEnabled() {
         return enabled;
     }
 
-    /**
-     * @param enabled the enabled to set
-     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    /**
-     * @return the roles
-     */
     public Set<Role> getRoles() {
         return roles;
     }
 
-    /**
-     * @param roles the roles to set
-     */
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.userName);
-        hash = 67 * hash + Objects.hashCode(this.password);
-        hash = 67 * hash + (this.enabled ? 1 : 0);
-        hash = 67 * hash + Objects.hashCode(this.roles);
+        int hash = 3;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.userName);
+        hash = 79 * hash + Objects.hashCode(this.password);
+        hash = 79 * hash + (this.enabled ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.roles);
         return hash;
     }
 
@@ -130,6 +99,7 @@ public class User {
         }
         return true;
     }
+    
     
     
 }

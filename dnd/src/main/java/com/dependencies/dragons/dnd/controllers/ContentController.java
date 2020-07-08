@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dependencies.dragons.dnd.controller;
+package com.dependencies.dragons.dnd.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 @Controller
-public class AdminController {
+public class ContentController {
     
-    @GetMapping("/admin")
-    public String displayAdminScreen() {
-        return "admin";
+    @GetMapping("/content")
+    public String contentPage() {
+        return "content";
     }
+    
 }

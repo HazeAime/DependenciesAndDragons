@@ -9,46 +9,34 @@ import java.util.Objects;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 public class Role {
     
     private int id;
     private String role;
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the role
-     */
     public String getRole() {
         return role;
     }
 
-    /**
-     * @param role the role to set
-     */
     public void setRole(String role) {
         this.role = role;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.role);
+        int hash = 5;
+        hash = 83 * hash + this.id;
+        hash = 83 * hash + Objects.hashCode(this.role);
         return hash;
     }
 
@@ -72,6 +60,7 @@ public class Role {
         }
         return true;
     }
+    
     
     
 }

@@ -16,29 +16,30 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Autowired
-    UserDetailsService udService;
+    UserDetailsService uds;
     
     @Override
-    protected void configure(HttpSecurity sec) throws Exception {
-        sec.authorizeRequests()
+    protected void configure(HttpSecurity hs) throws Exception {
+        hs.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**", "/js/**", "/fonts/**").permitAll()
-                .anyRequest().access("hasRole('ROLE_DM') or hasRole('ROLE_PLAYER')")
-                .and().formLogin().loginPage("/login")
-                    .failureUrl("/login?login_error=1").permitAll()
+                .anyRequest().hasAnyRole("ADMIN", "DM", "PLAYER")
+                //.access("hasRole('ROLE_DM') or hasRole('ROLE_PLAYER')")
+                .and().formLogin().loginPage("/login").failureUrl("/login?login_error=1").permitAll()
                 .and().logout().logoutSuccessUrl("/").permitAll();
     }
     
     @Autowired
-    public void configureGlobalInDB(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(udService).passwordEncoder(new BCryptPasswordEncoder());
+    public void configureGlobalInDB(AuthenticationManagerBuilder amb) throws Exception {
+     amb.userDetailsService(uds).passwordEncoder(new BCryptPasswordEncoder());
     }
+    
 }

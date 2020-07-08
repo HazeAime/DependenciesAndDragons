@@ -5,9 +5,8 @@
  */
 package com.dependencies.dragons.dnd.service;
 
-import com.dependencies.dragons.dnd.dao.UserDao;
+import com.dependencies.dragons.dnd.daos.UserDao;
 import com.dependencies.dragons.dnd.entities.Role;
-//import com.dependencies.dragons.dnd.entities.User;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +20,22 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetalsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserDao uDao;
     
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.dependencies.dragons.dnd.entities.User toGet = uDao.getUserByName(username);
-        Set<GrantedAuthority> fakeroles = new HashSet<>();
-        
-        for(Role toConvert: toGet.getRoles()) {
-            fakeroles.add(new SimpleGrantedAuthority(toConvert.getRole()));
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        com.dependencies.dragons.dnd.entities.User toConvert = uDao.getUserByName(userName);
+        Set<GrantedAuthority> fakeRoles = new HashSet<>();
+        for (Role role: toConvert.getRoles()) {
+            fakeRoles.add(new SimpleGrantedAuthority(role.getRole()));
         }
-        
-        return new User(username, toGet.getPassword(), fakeroles);
+        return new User(userName, toConvert.getPassword(), fakeRoles);
     }
     
 }

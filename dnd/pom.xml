@@ -12,7 +12,7 @@
 	<artifactId>dnd</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dnd</name>
-	<description>Software Guild Group Project</description>
+	<description>Group project for Software Guild</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -35,13 +35,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -63,6 +61,10 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+                 <dependency>
+                    <groupId>org.thymeleaf.extras</groupId>
+                    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+                </dependency>
 	</dependencies>
 
 	<build>

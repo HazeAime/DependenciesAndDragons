@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dependencies.dragons.dnd.dao;
+package com.dependencies.dragons.dnd.daos;
 
+import com.dependencies.dragons.dnd.daos.RoleDaoDB.RoleMapper;
 import com.dependencies.dragons.dnd.entities.Role;
 import com.dependencies.dragons.dnd.entities.User;
 import java.sql.ResultSet;
@@ -15,20 +16,19 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 @Component
-public class UserDBDao implements UserDao {
-
-    @Autowired
-    JdbcTemplate template;
+public class UserDaoDB implements UserDao {
     
+    @Autowired
+    JdbcTemplate jdbc;
+
     @Override
     public User getUserById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -37,11 +37,11 @@ public class UserDBDao implements UserDao {
     @Override
     public User getUserByName(String userName) {
         try {
-            User toGet = template.queryForObject("select * from user where username = ?", new UserMapper(), userName);
-            Set<Role> userRoles = getRolesByUserId();
-            toGet.setRoles(userRoles);
-            
-            return toGet;
+            User user = jdbc.queryForObject("SELECT * FROM user WHERE username = ?",
+                    new UserMapper(), userName);
+            Set<Role> userRoles = getRolesByUserId(user.getId());
+            user.setRoles(userRoles);
+            return user;
         } catch (DataAccessException ex) {
             return null;
         }
@@ -53,49 +53,36 @@ public class UserDBDao implements UserDao {
     }
 
     @Override
-    public void updateUser(User toUpdate) {
+    public void updateUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUserById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User createUser(User toAdd) {
+    public User createUser(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private Set<Role> getRolesByUserId() {
-        return new HashSet<>(template.query("select * from role inner join user_role on role.id = user_role.roleid", new RoleMapper()));
+    private Set<Role> getRolesByUserId(int id) {
+        return new HashSet<>(jdbc.query("SELECT * FROM role INNER JOIN user_role ur ON role.id "
+                + "= ur.roleid WHERE userid = ?", new RoleMapper(), id));
     }
 
     private static class UserMapper implements RowMapper<User> {
 
         @Override
         public User mapRow(ResultSet rs, int i) throws SQLException {
-            User toReturn = new User();
-            toReturn.setId(rs.getInt("id"));
-            toReturn.setUserName(rs.getString("userName"));
-            toReturn.setPassword(rs.getString("password"));
-            toReturn.setEnabled(rs.getBoolean("enabled"));
-            return toReturn;
+            User u = new User();
+            u.setId(rs.getInt("id"));
+            u.setUserName(rs.getString("username"));
+            u.setPassword(rs.getString("password"));
+            u.setEnabled(rs.getBoolean("enabled"));
+            return u;
         }
-
-       
-    }
-
-    private static class RoleMapper implements RowMapper<Role> {
-
-        @Override
-        public Role mapRow(ResultSet rs, int i) throws SQLException {
-            Role toReturn = new Role();
-            toReturn.setId(rs.getInt("id"));
-            toReturn.setRole("role");
-            return toReturn;
-        }
-
         
     }
     

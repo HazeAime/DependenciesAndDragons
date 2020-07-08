@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dependencies.dragons.dnd.controller;
+package com.dependencies.dragons.dnd.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
- * @author jweez
+ * @author codedchai
  */
 @Controller
 public class LoginController {
@@ -19,6 +19,4 @@ public class LoginController {
     public String displayLogin() {
         return "login";
     }
-    
-    
 }
