@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.daos;
 
+import com.dependencies.dragons.dnd.entities.DndCharacter;
 import java.util.List;
 
 /**

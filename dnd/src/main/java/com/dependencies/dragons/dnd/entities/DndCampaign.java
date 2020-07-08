@@ -16,5 +16,5 @@ public class DndCampaign {
     List<DndCharacter> characterList;
     String map;
     String description;
-    
+    User dmAffiliated;
 }

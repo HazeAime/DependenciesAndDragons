@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.daos;
 
+import com.dependencies.dragons.dnd.entities.DndCampaign;
 import java.util.List;
 
 /**
@@ -13,14 +14,14 @@ import java.util.List;
  */
 public interface CampaignDao {
     
-    public Campaign createCampaign();
+    public DndCampaign createCampaign();
     
-    public Campaign getCampaignById(int id);
+    public DndCampaign getCampaignById(int id);
     
-    public List<Campaign> getAllCampaigns();
+    public List<DndCampaign> getAllCampaigns();
     
-    public void updateCampaign(Campaign toEdit);
+    public void updateCampaign(DndCampaign toEdit);
     
-    public void deleteCampaign(Campaign toRemove);
+    public void deleteCampaign(DndCampaign toRemove);
     
 }
