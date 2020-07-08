@@ -82,8 +82,6 @@ public class UserDaoDB implements UserDao {
             u.setPassword(rs.getString("password"));
             u.setEnabled(rs.getBoolean("enabled"));
             return u;
-        }
-        
-    }
-    
+        }     
+    }   
 }
