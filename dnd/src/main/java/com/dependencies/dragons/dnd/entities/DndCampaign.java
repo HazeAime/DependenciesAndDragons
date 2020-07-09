@@ -6,14 +6,26 @@
 package com.dependencies.dragons.dnd.entities;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author bkb
  */
+@Entity
 public class DndCampaign {
+    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     Integer campaignId;
+    
+    @ManyToMany
     List<DndCharacter> characterList;
+    
     String map;
     String description;
     User dmAffiliated;

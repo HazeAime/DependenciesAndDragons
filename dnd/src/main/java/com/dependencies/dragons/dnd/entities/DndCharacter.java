@@ -5,13 +5,24 @@
  */
 package com.dependencies.dragons.dnd.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author bkb
  */
+@Entity
 public class DndCharacter {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     Integer characterId;
+    
+    DndCampaign campaign;
+    
     String characterName;
     String playerName;
     String alignment;

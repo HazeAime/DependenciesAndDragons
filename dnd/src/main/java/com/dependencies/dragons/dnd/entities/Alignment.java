@@ -5,11 +5,23 @@
  */
 package com.dependencies.dragons.dnd.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author bkb
  */
+@Entity
 public class Alignment {
-   Integer id;
-   String name;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    Integer id;
+    
+    @Column
+    String name;
 }
