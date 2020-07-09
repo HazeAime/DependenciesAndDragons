@@ -33,6 +33,6 @@ public class DndCampaign {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User dmAffiliated;
 }
