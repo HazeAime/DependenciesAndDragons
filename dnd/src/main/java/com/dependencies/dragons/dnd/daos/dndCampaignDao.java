@@ -13,15 +13,15 @@ import java.util.List;
  * @author siessejordan
  */
 public interface dndCampaignDao {
-    
+
     public DndCampaign createCampaign();
-    
+
     public DndCampaign getCampaignById(int id);
-    
+
     public List<DndCampaign> getAllCampaigns();
-    
+
     public void updateCampaign(DndCampaign toEdit);
-    
+
     public void deleteCampaign(DndCampaign toRemove);
-    
+
 }
