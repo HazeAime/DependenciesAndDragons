@@ -64,7 +64,7 @@ create table dndCampaign (
 	id int primary key auto_increment,
     map varchar(100) not null,
     `description` varchar(200) not null,
-    userid int not null,
+    userId int not null,
     foreign key (userid)
 		references `user`(id)
     );
@@ -84,6 +84,7 @@ create table dndCharacter (
     intelligence int not null,
     wisdom int not null,
     charisma int not null,
+     
     stStrength int not null,
     stDexterity int not null,
 	stConstitution int not null,
