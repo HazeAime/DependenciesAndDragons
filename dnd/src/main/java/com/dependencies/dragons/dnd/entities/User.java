@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -21,21 +23,26 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class User {
-    
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
+
     @Column(nullable = false)
     private String userName;
-    
+
     @Column(nullable = false)
     private String password;
-    
+
     @Column(nullable = false)
     private boolean enabled;
-    
-    @OneToMany
+
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = {
+                @JoinColumn(name = "userId")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "roleId")})
     private Set<Role> roles;
 
     /**
@@ -149,5 +156,4 @@ public class User {
         return true;
     }
 
-    
 }

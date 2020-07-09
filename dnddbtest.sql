@@ -23,8 +23,8 @@ create table user_role (
 );
 
 create table characterClass (
-	classId int primary key auto_increment,
-    className varchar(20) not null,
+	id int primary key auto_increment,
+    `name` varchar(20) not null,
     hitDie varchar(3) not null,
     primaryAbility varchar(20) not null,
     saves varchar(30) not null
@@ -99,7 +99,7 @@ create table dndCharacter (
     foreign key (campaignId)
 		references dndcampaign(id),
     foreign key (classId)
-		references characterClass(classId),
+		references characterClass(id),
 	foreign key (alignmentId)
 		references alignment(id),
 	foreign key (raceId)

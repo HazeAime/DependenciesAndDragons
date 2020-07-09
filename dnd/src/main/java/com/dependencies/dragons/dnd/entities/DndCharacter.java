@@ -28,7 +28,7 @@ public class DndCharacter {
     Integer characterId;
     
     @ManyToOne
-    @JoinColumn(name = "campaignId")
+    @JoinColumn(name = "id")
     DndCampaign campaign;
     
     @Column(nullable = false)
@@ -38,7 +38,7 @@ public class DndCharacter {
     String playerName;
     
     @ManyToOne
-    @JoinColumn(name = "alignmentId")
+    @JoinColumn(name = "id")
     Alignment alignment;
     
     @Column(nullable = false)
@@ -48,7 +48,7 @@ public class DndCharacter {
     Integer characterLvl;
     
     @ManyToOne
-    @JoinColumn(name = "classId")
+    @JoinColumn(name = "id")
     CharacterClass characterClass;
     
     @Column(nullable = false)
@@ -100,7 +100,7 @@ public class DndCharacter {
     Integer armorClass;
     
     @ManyToOne
-    @JoinColumn(name = "raceId")
+    @JoinColumn(name = "id")
     Race characterRace;
     
     @ManyToMany
