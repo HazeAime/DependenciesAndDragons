@@ -5,6 +5,8 @@
  */
 package com.dependencies.dragons.dnd.entities;
 
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +21,12 @@ public class Skill {
     
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer id;
+    private Integer id;
     
-    String name;
-    String description;
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(nullable = false)
+    private String description;
+    
 }
