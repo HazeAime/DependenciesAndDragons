@@ -60,6 +60,15 @@ create table alignment (
     `name` varchar(20) not null
     );
     
+create table dndCampaign (
+	id int primary key auto_increment,
+    map varchar(100) not null,
+    `description` varchar(200) not null,
+    userid int not null,
+    foreign key (userid)
+		references `user`(id)
+    );
+   
 create table dndCharacter (
 	id int primary key auto_increment,
     characterName varchar(30) not null,
@@ -85,6 +94,9 @@ create table dndCharacter (
     backstory varchar(200),
     hitDice int not null,
     armorClass int not null,
+    campaignId int not null,
+    foreign key (campaignId)
+		references dndcampaign(id),
     foreign key (classId)
 		references characterClass(classId),
 	foreign key (alignmentId)
@@ -92,16 +104,7 @@ create table dndCharacter (
 	foreign key (raceId)
 		references race(id)
     );
-    
-create table dndCampaign (
-	id int primary key auto_increment,
-    map varchar(100) not null,
-    `description` varchar(200) not null,
-    userid int not null,
-    foreign key (userid)
-		references `user`(id)
-    );
-    
+ 
 create table character_item (
 	characterId int not null,
     itemId int not null,
