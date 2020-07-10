@@ -16,4 +16,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DndCampaignRepository extends JpaRepository<DndCampaign, Integer> {
     
+    public User getUserById(Campaign campaign){
+        
+    }
+    
 }
