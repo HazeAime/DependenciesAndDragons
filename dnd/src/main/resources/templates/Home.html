@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <title>Super Sightings</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+            }
+        
+            .bg {
+                background: rgba(0,0,0,.8);
+            }
+            body {
+                background: url("https://i.imgur.com/fsnPRB9.jpg"); 
+                background-size: cover;
+                height: 100%;
+            }
+            footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 2.5rem;            /* Footer height */
+            }
+            .container {
+                position: relative;
+                min-height: 100vh;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row m-4">
+                <div class="col">
+                    <a class="btn btn-outline-danger btn-block bg" style="font-size: 50px; font-weight: bold" href="/">Dependencies & Dragons</a>
+                </div>
+            </div>
+            <div class="row m-4 border border-dark bg">
+                <div class="col text-center m-2">
+                    <a href="sightings" class="btn btn-outline-danger btn-lg">Campaign Results</a>
+                </div>
+                <div class="col text-center m-2">
+                    <a href="supers" class="btn btn-outline-danger btn-lg">D&D Basics</a>
+                </div>
+                <div class="col text-center m-2">
+                    <a href="powers" class="btn btn-outline-danger btn-lg">About the DMs</a>
+                </div>
+                <div class="col text-center m-2">
+                    <a href="organizations" class="btn btn-outline-danger btn-lg">Login/Sign Up</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 class="border border-dark bg text-center" style="color: whitesmoke">The Latest News</h3>
+                    <div  class="border border-dark bg" style="height:300px; overflow-y: scroll;">
+                        <h5 style="color: whitesmoke;">Campaign News</h5><hr/>
+                        <p style="color: whitesmoke;">7/10/2020</p>
+                        <p style="color: whitesmoke;">This is what happened last time...</p>
+                    </div>
+                </div>
+                <div class="col-3 text-center border border-dark bg">
+                    <button class="btn btn-outline-danger btn-md m-3">Create New Character</button>
+                    <button class="btn btn-outline-danger btn-md m-3">View All Characters</button>
+                    <button class="btn btn-outline-danger btn-md m-3">Create New Campaign</button>
+                    <button class="btn btn-outline-danger btn-md m-3">View All Campaigns</button>
+                    <button class="btn btn-outline-danger btn-md m-3">Approve Characters</button>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+        crossorigin="anonymous"></script>
+    </body>
+</html>
