@@ -65,7 +65,7 @@ create table dndCampaign (
     map varchar(100) not null,
     `description` varchar(200) not null,
     userId int not null,
-    foreign key (userid)
+    foreign key (userId)
 		references `user`(id)
     );
    
@@ -84,7 +84,6 @@ create table dndCharacter (
     intelligence int not null,
     wisdom int not null,
     charisma int not null,
-     
     stStrength int not null,
     stDexterity int not null,
 	stConstitution int not null,
@@ -97,7 +96,7 @@ create table dndCharacter (
     armorClass int not null,
     campaignId int not null,
     foreign key (campaignId)
-		references dndcampaign(id),
+		references dndCampaign(id),
     foreign key (classId)
 		references characterClass(id),
 	foreign key (alignmentId)
