@@ -104,19 +104,19 @@ public class DndCharacter {
     Race characterRace;
     
     @ManyToMany
-    @JoinTable(name = "character_skill", 
+    @JoinTable(name = "Character_Skill", 
             joinColumns = {@JoinColumn(name = "characterId")},
             inverseJoinColumns = {@JoinColumn(name = "skillId")})
     List<Skill> allSkills;
     
     @ManyToMany
-    @JoinTable(name = "character_item", 
+    @JoinTable(name = "Character_Item", 
             joinColumns = {@JoinColumn(name = "characterId")},
             inverseJoinColumns = {@JoinColumn(name = "itemId")})
     List<Item> allItems;
     
     @ManyToMany
-    @JoinTable(name = "character_attackOrSpell", 
+    @JoinTable(name = "Character_AttackOrSpell", 
             joinColumns = {@JoinColumn(name = "characterId")},
             inverseJoinColumns = {@JoinColumn(name = "attackOrSpellId")})
     List<AttackOrSpell> allAttackOrSpells;
