@@ -20,8 +20,8 @@ public class Item {
     
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer itemId;
+    Integer id;
     
     @Column(nullable = false)
-    String itemName;
+    String name;
 }

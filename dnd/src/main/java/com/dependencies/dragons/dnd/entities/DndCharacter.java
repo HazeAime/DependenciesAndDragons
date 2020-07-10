@@ -25,10 +25,10 @@ public class DndCharacter {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer characterId;
+    Integer id;
     
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "campaignId")
     DndCampaign campaign;
     
     @Column(nullable = false)
@@ -38,7 +38,7 @@ public class DndCharacter {
     String playerName;
     
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "alignmentId")
     Alignment alignment;
     
     @Column(nullable = false)
@@ -48,7 +48,7 @@ public class DndCharacter {
     Integer characterLvl;
     
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "classId")
     CharacterClass characterClass;
     
     @Column(nullable = false)
@@ -100,7 +100,7 @@ public class DndCharacter {
     Integer armorClass;
     
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "raceId")
     Race characterRace;
     
     @ManyToMany

@@ -20,10 +20,10 @@ public class CharacterClass {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Integer classId;
+    private Integer id;
 
     @Column(nullable = false)
-    private String className;
+    private String name;
 
     @Column(nullable = false)
     private String hitDie;

@@ -24,7 +24,7 @@ public class DndCampaign {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Integer campaignId;
+    private Integer id;
 
     @Column(nullable = false)
     private String map;
