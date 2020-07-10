@@ -58,7 +58,7 @@ public class MainController {
     
     @GetMapping("/")
     public String displayHomepage() {   
-        return "homepage";
+        return "home";
     }
     
 }
