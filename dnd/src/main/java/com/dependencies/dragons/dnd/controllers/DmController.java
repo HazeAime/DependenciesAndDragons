@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.entities.DndCampaign;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -17,14 +18,17 @@ import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
  * @author codedchai
  */
 @Controller
-public class MainController {
+public class DmController {
     
     @Autowired
     AlignmentRepository align;
@@ -56,9 +60,45 @@ public class MainController {
     @Autowired
     UserRepository user;
     
-    @GetMapping("/")
-    public String displayHomepage() {   
-        return "homepage";
+    @GetMapping("createcampaign")
+    public String createCampaign(Model model) {
+        model.addAttribute("users", user.findAll());
+        return "createcampaign";
     }
+    
+    @PostMapping("createcampaign")
+    public String createCampaign(DndCampaign toAdd) {
+        campaign.save(toAdd);
+        return "redirect:/campaigns";
+    }
+    
+    @GetMapping("campaigns")
+    public String displayAllCampaigns(Model model) {  
+        model.addAttribute("campaigns", campaign.findAll());
+        return "campaigns";
+    }
+    
+    @GetMapping("updatecampaign/{id}")
+    public String updateCampaign(Model model, @PathVariable Integer id) {
+        model.addAttribute("campaign", campaign.findById(id));
+        //not done
+        return "updatecampaign";
+    }
+    
+    @PostMapping("updatecampaign")
+    public String updateCampaign() {
+        
+        return "redirect:/campaign";
+    }
+    
+//    @GetMapping()
+//    public String viewCharacters() {
+//        return "";
+//    }
+//    
+//    @GetMapping()
+//    public String approveCharacter() {
+//        return "";
+//    }
     
 }

@@ -38,7 +38,7 @@ public class User {
     private boolean enabled;
 
     @ManyToMany
-    @JoinTable(name = "user_role",
+    @JoinTable(name = "User_Role",
             joinColumns = {
                 @JoinColumn(name = "userId")},
             inverseJoinColumns = {
