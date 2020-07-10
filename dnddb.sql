@@ -71,6 +71,7 @@ create table DndCampaign (
    
 create table DndCharacter (
 	id int primary key auto_increment,
+    approval boolean default false not null,
     characterName varchar(30) not null,
     playerName varchar(30) not null,
     alignmentId int not null,

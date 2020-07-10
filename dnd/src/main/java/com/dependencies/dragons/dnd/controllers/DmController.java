@@ -6,6 +6,7 @@
 package com.dependencies.dragons.dnd.controllers;
 
 import com.dependencies.dragons.dnd.entities.DndCampaign;
+import com.dependencies.dragons.dnd.entities.DndCharacter;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -16,6 +17,7 @@ import com.dependencies.dragons.dnd.repositories.RaceRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,24 +83,39 @@ public class DmController {
     @GetMapping("updatecampaign/{id}")
     public String updateCampaign(Model model, @PathVariable Integer id) {
         model.addAttribute("campaign", campaign.findById(id));
-        //not done
+        model.addAttribute("user", user.findAll());
+        
         return "updatecampaign";
     }
     
     @PostMapping("updatecampaign")
-    public String updateCampaign() {
-        
+    public String updateCampaign(DndCampaign toEdit) {
+        campaign.save(toEdit);
         return "redirect:/campaign";
     }
     
-//    @GetMapping()
-//    public String viewCharacters() {
+    @GetMapping("campaigns/{id}")
+    public String displayCampaignDetails(Model model, @PathVariable Integer id){
+        model.addAttribute("campaign", campaign.findById(id));
+        return "campaigndetails";
+    }
+    
+//    @GetMapping("campaign/characters")
+//    public String viewCharacters(Model model) {
+//        model.addAttribute("campaign", campaign)
 //        return "";
 //    }
 //    
-//    @GetMapping()
-//    public String approveCharacter() {
-//        return "";
-//    }
+    @GetMapping("characterapproval")
+    public String displayCharacterApproval(Model model) {
+        model.addAttribute("characters", dndChar.findAll());
+        return "characterapproval";
+    }
+    
+    @PostMapping("characterapproval")
+    public String updateApproval(List<DndCharacter> characters){
+        dndChar.saveAll(characters);
+        return "redirect:/characterapproval";
+    }
     
 }
