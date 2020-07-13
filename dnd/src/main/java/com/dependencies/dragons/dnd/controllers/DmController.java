@@ -94,7 +94,7 @@ public class DmController {
         return "redirect:/campaign";
     }
     
-    @GetMapping("campaigns/{id}")
+    @GetMapping("campaigndetails/{id}")
     public String displayCampaignDetails(Model model, @PathVariable Integer id){
         model.addAttribute("campaign", campaign.findById(id));
         return "campaigndetails";
