@@ -94,7 +94,7 @@ public class DndCharacter {
     String backstory;
     
     @Column(nullable = false)
-    Integer hitDice;
+    String hitDice;
     
     @Column(nullable = false)
     Integer armorClass;
