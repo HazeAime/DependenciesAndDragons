@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -71,14 +67,25 @@ and open the template in the editor.
             </div>
             <div class="row">
                 
-<!--                <div class="col">
-                    <h3 class="border border-dark bg text-center" style="color: whitesmoke">The Latest News</h3>
+               <div class="col">
+                    <h3 class="border border-dark bg text-center" style="color: whitesmoke">Character Details</h3>
                     <div  class="border border-dark bg" style="height:300px; overflow-y: scroll;">
-                        <h5 style="color: whitesmoke;">Campaign News</h5><hr/>
-                        <p style="color: whitesmoke;">7/10/2020</p>
-                        <p style="color: whitesmoke;">This is what happened last time...</p>
+                        <div class="row">
+                            <div class="col-3">
+                                <table style="border: solid whitesmoke; margin:10px">
+                                    <tr>
+                                        <th style="color: whitesmoke; padding: 10px">Character Name:</th>
+                                        <th th:text="${DnDCharacter.characterName}" style="color: whitesmoke"></th>
+                                    </tr>
+                                </table>>
+                            </div>
+
+                            <div class="col-6">
+
+                            </div>
+                        </div>
                     </div>
-                </div>-->
+                </div>
 
                 <div class="col-3 text-center border border-dark bg">
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
