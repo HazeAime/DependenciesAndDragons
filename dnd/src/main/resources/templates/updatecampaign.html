@@ -75,32 +75,41 @@ and open the template in the editor.
             </div>
         </div>
         <div class="border border-dark bg text-center m-1">
-            <h3 style="color: whitesmoke">Campaign Details</h3>
+            <h3 style="color: whitesmoke">Update Campaign</h3>
         </div>
 
         <div class="row">
             <div class="col-9">
+                <form action="createcampaign" method="POST">
                     <div class="col">
                         <div class="border border-dark bg text-center m-1">
-                            <h4 style="color: whitesmoke" th:text="${campaign.dmAffiliated.userName}+'&#8217;s Campaign'" >DM's Campaign</h4>
-                            <h5 style="color: whitesmoke" th:text="'Campaign Id: '+${campaign.id}" >Campaign Id</h5>
+                            <label for="dm" style="color: whitesmoke">Campaign DM: </label>
+                            <select name="dm" id="dmSelect">
+                                <option value="0">Select a DM</option>
+                                <option th:each="dm : ${users}" th:value="${dm.id}" th:text="${dm.userName}"></option>
+                            </select>
                         </div>
                         <div class="row">
                             <div class="col border border-dark bg text-center m-1" style="height:300px;">
                                 <h5 style="color: whitesmoke;">Map</h5>
-                                <img th:src="${campaign.map}" alt="Campaign Map" width="200" height="200"/>
+                                <label for="campaignMap" style="color: whitesmoke;">Input a map image here: </label>
+                                <input class="border border-dark bg" style="color: whitesmoke" type="file"
+                                    id="campaignMap" name="campaignMap" th:value="${campaign.map}" accept="image/*" />
                             </div>
                             <div class="col border border-dark bg text-center m-1" style="height:300px;">
-                                <h5 style="color: whitesmoke;">Description</h5>
+                                <h5 style="color: whitesmoke;" th:text="${campaign.description}">Description</h5>
                                 <div class="row">
-                                    <p class="border border-dark bg text-center m-1" style="color: whitesmoke; height: 250px; width: 100%;">Campaign Description</p>
+                                    <textarea name="description" id="descriptionInput" class="form-control m-1"
+                                        style="height: 250px; resize: none;"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-
+                            <button type="submit" class="btn btn-outline-danger btn-block bg m-1">Update
+                                Campaign</button>
                         </div>
                     </div>
+                </form>
             </div>
             <div class="col-3 text-center border border-dark bg">
                 <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
