@@ -83,7 +83,7 @@ public class DmController {
     @GetMapping("updatecampaign/{id}")
     public String updateCampaign(Model model, @PathVariable Integer id) {
         model.addAttribute("campaign", campaign.findById(id));
-        model.addAttribute("user", user.findAll());
+        model.addAttribute("users", user.findAll());
         
         return "updatecampaign";
     }
