@@ -106,16 +106,16 @@ public class DmController {
 //        return "";
 //    }
 //    
-    @GetMapping("characterapproval")
+    @GetMapping("approvecharacter")
     public String displayCharacterApproval(Model model) {
         model.addAttribute("characters", dndChar.findAll());
-        return "characterapproval";
+        return "approvecharacter";
     }
     
-    @PostMapping("characterapproval")
+    @PostMapping("approvecharacter")
     public String updateApproval(List<DndCharacter> characters){
         dndChar.saveAll(characters);
-        return "redirect:/characterapproval";
+        return "redirect:/approvecharacter";
     }
     
     
