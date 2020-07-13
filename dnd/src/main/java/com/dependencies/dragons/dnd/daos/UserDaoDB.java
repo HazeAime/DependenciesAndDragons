@@ -37,7 +37,7 @@ public class UserDaoDB implements UserDao {
     @Override
     public User getUserByName(String userName) {
         try {
-            User user = jdbc.queryForObject("SELECT * FROM user WHERE username = ?",
+            User user = jdbc.queryForObject("SELECT * FROM User WHERE username = ?",
                     new UserMapper(), userName);
             Set<Role> userRoles = getRolesByUserId(user.getId());
             user.setRoles(userRoles);
@@ -68,7 +68,7 @@ public class UserDaoDB implements UserDao {
     }
 
     private Set<Role> getRolesByUserId(int id) {
-        return new HashSet<>(jdbc.query("SELECT * FROM role INNER JOIN user_role ur ON role.id "
+        return new HashSet<>(jdbc.query("SELECT * FROM Role INNER JOIN User_Role ur ON Role.id "
                 + "= ur.roleid WHERE userid = ?", new RoleMapper(), id));
     }
 
