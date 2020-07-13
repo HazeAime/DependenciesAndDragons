@@ -91,7 +91,7 @@ public class DmController {
     @PostMapping("updatecampaign")
     public String updateCampaign(DndCampaign toEdit) {
         campaign.save(toEdit);
-        return "redirect:/campaign";
+        return "redirect:/campaigns";
     }
     
     @GetMapping("campaigndetails/{id}")
@@ -117,7 +117,5 @@ public class DmController {
         dndChar.saveAll(characters);
         return "redirect:/approvecharacter";
     }
-    
-    
     
 }

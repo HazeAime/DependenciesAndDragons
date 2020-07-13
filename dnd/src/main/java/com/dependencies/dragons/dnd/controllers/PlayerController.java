@@ -5,7 +5,23 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.entities.DndCharacter;
+import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
+import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
+import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
+import com.dependencies.dragons.dnd.repositories.DndCampaignRepository;
+import com.dependencies.dragons.dnd.repositories.DndCharacterRepository;
+import com.dependencies.dragons.dnd.repositories.ItemRepository;
+import com.dependencies.dragons.dnd.repositories.RaceRepository;
+import com.dependencies.dragons.dnd.repositories.RoleRepository;
+import com.dependencies.dragons.dnd.repositories.SkillRepository;
+import com.dependencies.dragons.dnd.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -13,5 +29,84 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class PlayerController {
+    
+    @Autowired
+    AlignmentRepository align;
+    
+    @Autowired 
+    AttackOrSpellRepository attkOrSpl;
+    
+    @Autowired
+    CharacterClassRepository charClass;
+    
+    @Autowired
+    DndCampaignRepository campaign;
+    
+    @Autowired
+    DndCharacterRepository dndChar;
+    
+    @Autowired
+    ItemRepository item;
+    
+    @Autowired
+    RaceRepository race;
+    
+    @Autowired
+    RoleRepository role;
+    
+    @Autowired
+    SkillRepository skill;
+    
+    @Autowired
+    UserRepository user;
+    
+    @GetMapping("createcharacter")
+    public String createCharacter(Model model) {
+        model.addAttribute("campaigns", campaign.findAll());
+        model.addAttribute("alignments", align.findAll());
+        model.addAttribute("classes", charClass.findAll());
+        model.addAttribute("races", race.findAll());
+        model.addAttribute("skills", skill.findAll());
+        model.addAttribute("items", item.findAll());
+        model.addAttribute("attacksSpells", attkOrSpl.findAll());
+        return "createcharacter";
+    }
+    
+    @PostMapping("createcharacter")
+    public String createCharacter(DndCharacter toAdd) {
+        dndChar.save(toAdd);
+        return "redirect:/characters";
+    }
+    
+    @GetMapping("characters")
+    public String displayAllCharacters(Model model) {  
+        model.addAttribute("characters", dndChar.findAll());
+        return "characters";
+    }
+    
+    @GetMapping("updatecharacter/{id}")
+    public String updateCharacter(Model model, @PathVariable Integer id) {
+        model.addAttribute("character", dndChar.findById(id));
+        model.addAttribute("campaigns", campaign.findAll());
+        model.addAttribute("alignments", align.findAll());
+        model.addAttribute("classes", charClass.findAll());
+        model.addAttribute("races", race.findAll());
+        model.addAttribute("skills", skill.findAll());
+        model.addAttribute("items", item.findAll());
+        model.addAttribute("attacksSpells", attkOrSpl.findAll());
+        return "updatecharacter";
+    }
+    
+    @PostMapping("updatecharacter")
+    public String updateCharacter(DndCharacter toEdit) {
+        dndChar.save(toEdit);
+        return "redirect:/characters";
+    }
+    
+    @GetMapping("characterdetails/{id}")
+    public String displayCharacterDetails(Model model, @PathVariable Integer id){
+        model.addAttribute("character", dndChar.findById(id));
+        return "characterdetails";
+    }
     
 }
