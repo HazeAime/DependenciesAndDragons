@@ -33,26 +33,26 @@ create table CharacterClass (
 create table Item (
 	id int primary key auto_increment,
     `name` varchar(100) not null,
-    `description` varchar(100)
+    `description` varchar(250)
     );
     
 create table Skill (
 	id int primary key auto_increment,
     `name` varchar(30) not null,
-    `description` varchar(100) not null
+    `description` varchar(250) not null
     );
     
 create table AttackOrSpell (
 	id int primary key auto_increment,
     `name` varchar(30) not null,
-    `description` varchar(30) not null,
-    damage int not null
+    `description` varchar(250) not null,
+    damage varchar(5) not null
     );
 
 create table Race (
 	id int primary key auto_increment,
     `name` varchar(30) not null,
-    `description` varchar(100) not null
+    `description` varchar(250) not null
     );
     
 create table Alignment (
@@ -63,7 +63,7 @@ create table Alignment (
 create table DndCampaign (
 	id int primary key auto_increment,
     map varchar(100) not null,
-    `description` varchar(200) not null,
+    `description` varchar(250) not null,
     userId int not null,
     foreign key (userId)
 		references `User`(id)
