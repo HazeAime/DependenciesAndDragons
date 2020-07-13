@@ -32,7 +32,7 @@ create table CharacterClass (
     
 create table Item (
 	id int primary key auto_increment,
-    `name` varchar(20) not null,
+    `name` varchar(100) not null,
     `description` varchar(100)
     );
     
