@@ -74,10 +74,10 @@
 
             <div class="col">
                 <h3 class="border border-dark bg text-center" style="color: whitesmoke">Character Details</h3>
-                <div class="border border-dark bg" style="height:300px; overflow-y: scroll;">
+                <div class="border border-dark bg" style="height:500px; overflow-y: scroll;">
                     <div class="row">
                         <div class="col-5 align-self-center">
-                            <table style="border: solid whitesmoke; margin:10px" >
+                            <table style="border: solid whitesmoke; margin:10px">
                                 <tr>
                                     <th style="color: whitesmoke; padding-right: 10px">Character Name:</th>
                                     <td th:text="${character.characterName}"
@@ -86,16 +86,19 @@
                             </table>
                         </div>
                         <div class="col-7">
-                            <table style="border: solid whitesmoke; margin:5px" >
+                            <table style="border: solid whitesmoke; margin:5px">
                                 <tr>
                                     <th style="color:whitesmoke; padding-right:5px">Class</th>
                                     <th style="color:whitesmoke; padding-right:5px">Level</th>
                                     <th style="color:whitesmoke; padding-right:5px">Player Name</th>
                                 </tr>
                                 <tr>
-                                    <td th:text="${character.characterClass.name}">Character class</td>
-                                    <td th:text="${character.characterLvl}"></td>
-                                    <td th:text="${character.playerName}"></td>
+                                    <td style="color:whitesmoke; padding-right:5px"
+                                        th:text="${character.characterClass.name}">Character class</td>
+                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.characterLvl}">
+                                        Character Level</td>
+                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.playerName}">
+                                        Player Name</td>
                                 </tr>
                                 <tr>
                                     <th style="color:whitesmoke; padding-right:5px">Race</th>
@@ -103,13 +106,121 @@
                                     <th style="color:whitesmoke; padding-right:5px">XP</th>
                                 </tr>
                                 <tr>
-                                    <td th:text="${character.characterRace.name}"></td>
-                                    <td th:text="${character.alignment.name}"></td>
-                                    <td th:text="${character.xp}"></td>
+                                    <td style="color:whitesmoke; padding-right:5px"
+                                        th:text="${character.characterRace.name}">Race</td>
+                                    <td style="color:whitesmoke; padding-right:5px"
+                                        th:text="${character.alignment.name}">Alginment</td>
+                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.xp}">XP</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-2 align-self-center">
+                            <table style="border: solid whitesmoke; margin:10px; min-height: 250px">
+                                <tr>
+                                    <th style="color:whitesmoke">Strength</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.strength}" style="color:whitesmoke">Strength</td>
+                                </tr>
+                                <tr>
+                                    <th style="color:whitesmoke">Dexterity</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.dexterity}" style="color:whitesmoke">Dexterity</td>
+                                </tr>
+                                <tr>
+                                    <th style="color:whitesmoke">Constitution</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.constitution}" style="color:whitesmoke">Constitution</td>
+                                </tr>
+                                <tr>
+                                    <th style="color:whitesmoke">Intelligence</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.intelligence}" style="color:whitesmoke">Intelligence</td>
+                                </tr>
+                                <tr>
+                                    <th style="color:whitesmoke">Wisdom</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.wisdom}" style="color:whitesmoke">wisdom</td>
+                                </tr>
+                                <tr>
+                                    <th style="color:whitesmoke">Charisma</th>
+                                </tr>
+                                <tr>
+                                    <td th:text="${character.charisma}" style="color:whitesmoke">Charisma</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col">
+                                    <table style="border: solid whitesmoke; margin:10px; text-align:center">
+                                        <tr>
+                                            <th style="color:whitesmoke">Strength Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stStrength}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Dexterity Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stDexterity}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Constitution Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stConstitution}" style="color:whitesmoke">Number
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Intelligence Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stIntelligence}" style="color:whitesmoke">Number
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Wisdom Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stWisdom}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Charisma Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stCharisma}" style="color:whitesmoke" >Number</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+
+                                    </div>
+
+                                    <div class="row">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                        </div>>
+
+                        <div class="col-6">
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
