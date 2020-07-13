@@ -56,8 +56,11 @@ and open the template in the editor.
                 <div class="col text-center m-2">
                     <a href="aboutdms" class="btn btn-outline-danger btn-lg">About the DMs</a>
                 </div>
-                <div class="col text-center m-2">
-                    <a href="login" class="btn btn-outline-danger btn-lg">Login/Sign Up</a>
+                <div sec:authorize="!isAuthenticated()" class="col text-center m-2">
+                    <a href="login" class="btn btn-outline-danger btn-lg">Login</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="col text-center m-2">
+                    <a href="/" class="btn btn-outline-danger btn-lg">Logout</a>
                 </div>
             </div>
             <div class="row">
@@ -70,7 +73,9 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="col-3 text-center border border-dark bg">
+                    <div sec:authorize="hasRole('ROLE_PLAYER')">
                     <a href="createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
+                    </div>
                     <a href="characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
                     <a href="createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
                     <a href="campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
