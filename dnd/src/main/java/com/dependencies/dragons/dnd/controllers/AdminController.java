@@ -30,12 +30,12 @@ public class AdminController {
     @Autowired
     DndCampaignRepository campaign;
 
-    @GetMapping("/admin")
+    @GetMapping("admin")
     public String displayAdminScreen() {
         return "admin";
     }
 
-    @GetMapping("/users")
+    @GetMapping("users")
     public String displayUsers(Model model) {
         model.addAttribute("users", user.findAll());
         return "users";
