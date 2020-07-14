@@ -23,6 +23,47 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DndCampaign {
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.approval ? 1 : 0);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.map);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.dmAffiliated);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DndCampaign other = (DndCampaign) obj;
+        if (this.approval != other.approval) {
+            return false;
+        }
+        if (!Objects.equals(this.map, other.map)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.dmAffiliated, other.dmAffiliated)) {
+            return false;
+        }
+        return true;
+    }
+
     @Column(nullable=false)
     private boolean approval;
     
@@ -40,43 +81,8 @@ public class DndCampaign {
     @JoinColumn(name = "userId", nullable = false)
     private User dmAffiliated;
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        hash = 41 * hash + Objects.hashCode(this.map);
-        hash = 41 * hash + Objects.hashCode(this.description);
-        hash = 41 * hash + Objects.hashCode(this.dmAffiliated);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final DndCampaign other = (DndCampaign) obj;
-        if (!Objects.equals(this.map, other.map)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.dmAffiliated, other.dmAffiliated)) {
-            return false;
-        }
-        return true;
-    }
-
+    
     /**
      * @return the id
      */
