@@ -124,8 +124,12 @@ public class DmController {
     }
     
     @PostMapping("approvecharacter")
-    public String updateApproval(List<DndCharacter> characters){
-        dndChar.saveAll(characters);
+    public String updateApproval(Integer[] charIds){
+        List<DndCharacter> characters = new ArrayList<>();
+        for (Integer id: charIds) {
+            //update some boolean about the character too?
+            dndChar.save(dndChar.findById(id).orElse(null));
+        }
         return "redirect:/approvecharacter";
     }
     
