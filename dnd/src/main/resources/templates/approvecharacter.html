@@ -17,7 +17,7 @@ and open the template in the editor.
                 height: 100%;
                 margin: 0;
             }
-​
+
             .bg {
                 background: rgba(0,0,0,.8);
             }
@@ -36,7 +36,7 @@ and open the template in the editor.
                 position: relative;
                 min-height: 100vh;
             }
-​
+
         </style>
     </head>
     <body>
@@ -61,12 +61,12 @@ and open the template in the editor.
                 </div>
                 <div sec:authorize="isAuthenticated()" class="col text-center m-2">
                     <form class="form-inline" method="POST" action="/logout">
-                    <input type="hidden" th:name="${_csrf.parameterName}" 
-                           th:value="${_csrf.token}"/>
-                    <button class="btn btn-outline-danger btn-lg" id="submit" type="submit">
-                        Logout
-                    </button>
-                </form>
+                        <input type="hidden" th:name="${_csrf.parameterName}" 
+                               th:value="${_csrf.token}"/>
+                        <button class="btn btn-outline-danger btn-lg" id="submit" type="submit">
+                            Logout
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="row">
@@ -74,28 +74,28 @@ and open the template in the editor.
                     <h3 class="border border-dark bg text-center" style="color: whitesmoke">All Characters</h3>
                     <div  class="border border-dark bg" style="height:300px; overflow-y: scroll; text-align: center;">
                         <form action="approvecharacter" method="POST">
-                        <table class="table text-center col-lg-11" style="border: solid whitesmoke; margin:10px 0px 10px 35px">
-                            <thead>
-                                <tr style="color: whitesmoke">
-                                    <th>UserId</th>
-                                    <th>Character Name</th>
-                                    <th>Character Details</th>
-                                    <th>Approve Character</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="character : ${characters}">
-                                    <td th:text="${character.id}" style="color: whitesmoke">ID</td>
-                                    <td th:text="${character.characterName}" style="color: whitesmoke">DM</td>
-                                    <td><a class="btn-outline-danger " href="#" th:href="${'/characterdetails/' + character.id}">Details</a></td>
-                                    <td>
-                                        <label for="approve">Accept</label>
-                                        <input name="approve" type="checkbox" th:value="${character.id}"/>
-                                    </td>
-                            </tbody>
-                        </table>
-                        <button type="submit" class="btn btn-outline-danger btn-md m-3">Approve Selected</button>
-                    </form>
+                            <table class="table text-center col-lg-11" style="border: solid whitesmoke; margin:10px 0px 10px 35px">
+                                <thead>
+                                    <tr style="color: whitesmoke">
+                                        <th>UserId</th>
+                                        <th>Character Name</th>
+                                        <th>Character Details</th>
+                                        <th>Approve Character</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="character : ${characters}">
+                                        <td th:text="${character.id}" style="color: whitesmoke">ID</td>
+                                        <td th:text="${character.characterName}" style="color: whitesmoke">DM</td>
+                                        <td><a class="btn-outline-danger " href="#" th:href="${'/characterdetails/' + character.id}">Details</a></td>
+                                        <td>
+                                            <label for="approve">Accept</label>
+                                            <input name="approve" type="checkbox" th:value="${character.id}"/>
+                                        </td>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-outline-danger btn-md m-3">Approve Selected</button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-3 text-center border border-dark bg">
