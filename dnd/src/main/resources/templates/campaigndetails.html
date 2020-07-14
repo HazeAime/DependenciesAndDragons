@@ -104,21 +104,21 @@ and open the template in the editor.
                 </div>
                 <div class="col-3 text-center border border-dark bg">
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
-                        <a href="createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
+                        <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
                     </div>
-                    <a href="characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
+                    <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                        <a href="createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
+                        <a href="/createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
                     </div>
-                    <a href="campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
+                    <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                        <a href="approvecharacter" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
+                        <a href="/approvecharacter" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
                     </div>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                        <a href="approvecampaign" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
+                        <a href="/approvecampaign" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
                     </div>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                        <a href="users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
+                        <a href="/users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
                     </div>
                 </div>
             </div>
