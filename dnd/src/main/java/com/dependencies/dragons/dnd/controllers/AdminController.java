@@ -58,6 +58,7 @@ public class AdminController {
 
     @PostMapping("approvecampaign")
     public String updateApproval(List<DndCampaign> campaigns) {
+        
         campaign.saveAll(campaigns);
         return "redirect:/approvecampaign";
     }
