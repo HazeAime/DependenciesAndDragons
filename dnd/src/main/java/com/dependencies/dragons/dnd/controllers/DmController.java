@@ -119,16 +119,23 @@ public class DmController {
 //    
     @GetMapping("approvecharacter")
     public String displayCharacterApproval(Model model) {
-        model.addAttribute("characters", dndChar.findAll());
+        List<DndCharacter> allChars = dndChar.findAll();
+        List<DndCharacter> toPassIn = new ArrayList<>();
+        for (DndCharacter dndCharacter: allChars) {
+            if (!dndCharacter.isApproval()) {
+                toPassIn.add(dndCharacter);
+            }
+        }
+        model.addAttribute("characters", toPassIn);
         return "approvecharacter";
     }
     
     @PostMapping("approvecharacter")
     public String updateApproval(Integer[] charIds){
-        List<DndCharacter> characters = new ArrayList<>();
         for (Integer id: charIds) {
-            //update some boolean about the character too?
-            dndChar.save(dndChar.findById(id).orElse(null));
+            DndCharacter dndCharacter = dndChar.findById(id).orElse(null);
+            dndCharacter.setApproval(true);
+            dndChar.save(dndCharacter);
         }
         return "redirect:/approvecharacter";
     }
