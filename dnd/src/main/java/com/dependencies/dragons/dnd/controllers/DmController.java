@@ -18,6 +18,7 @@ import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,7 +83,8 @@ public class DmController {
     
     @GetMapping("updatecampaign/{id}")
     public String updateCampaign(Model model, @PathVariable Integer id) {
-        model.addAttribute("campaign", campaign.findById(id));
+        DndCampaign camp = campaign.findById(id).orElse(null);
+        model.addAttribute("campaign", camp);
         model.addAttribute("users", user.findAll());
         
         return "updatecampaign";
@@ -96,7 +98,8 @@ public class DmController {
     
     @GetMapping("campaigndetails/{id}")
     public String displayCampaignDetails(Model model, @PathVariable Integer id){
-        model.addAttribute("campaign", campaign.findById(id));
+        DndCampaign camp = campaign.findById(id).orElse(null);
+        model.addAttribute("campaign", camp);
         return "campaigndetails";
     }
     
