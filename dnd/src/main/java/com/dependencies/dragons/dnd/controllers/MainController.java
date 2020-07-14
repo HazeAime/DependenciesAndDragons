@@ -18,6 +18,7 @@ import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -64,7 +65,8 @@ public class MainController {
     }
     
     @GetMapping("createnewuser")
-    public String createNewUser() {
+    public String createNewUser(Model model) {
+        model.addAttribute("roles", role.findAll());
         return "createnewuser";
     }
     
