@@ -81,7 +81,7 @@ and open the template in the editor.
                                         <th>ID</th>
                                         <th>Campaign DM</th>
                                         <th>Campaign Details</th>
-                                        <th>Approve</th>
+                                        <th>Accept</th>
 
                                     </tr>
                                 </thead>
@@ -90,7 +90,10 @@ and open the template in the editor.
                                         <td th:text="${campaign.id}" style="color: whitesmoke">ID</td>
                                         <td th:text="${campaign.dmAffiliated.userName}" style="color: whitesmoke">DM</td>
                                         <td><a class="btn-outline-danger " href="#" th:href="${'/campaigndetails/' + campaign.id}">Details</a></td>
-                                        <td><a class="btn-outline-danger " href="#" th:href="${'/updatecampaign/' + campaign.id}">Edit</a></td>
+                                        <td>
+                                            <label for="approve" style="color:whitesmoke">Accept</label>
+                                            <input name="approve" type="checkbox" th:value="${campaign.id}" />
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

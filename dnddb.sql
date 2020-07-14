@@ -235,7 +235,8 @@ insert Alignment (`name`) values
         armorClass,
         campaignId
     ) values
-		(1, true, 'Legolas', 'David Smelser', 1, 0, 1, 1, 1, 16, 20, 12, 12, 14, 10, 11, 13, 9, 8, 8, 3, 0, "Programming teacher by day, sharpshooting Ranger by night", "d10", 20, 1);
+		(1, true, 'Legolas', 'David Smelser', 1, 0, 1, 1, 1, 16, 20, 12, 12, 14, 10, 11, 13, 9, 8, 8, 3, 0, "Programming teacher by day, sharpshooting Ranger by night", "d10", 20, 1),
+        (2, false, 'Bilbo', 'Kipp Graham', 1, 0, 1, 1, 1, 16, 20, 12, 12, 14, 10, 11, 13, 9, 8, 8, 3, 0, "Career guru by day, happy hobbit by night", "d10", 20, 1);
     
     
 
