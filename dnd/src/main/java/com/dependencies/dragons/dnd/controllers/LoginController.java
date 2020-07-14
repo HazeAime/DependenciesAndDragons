@@ -5,8 +5,10 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.entities.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *

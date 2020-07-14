@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.entities.User;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -18,6 +19,7 @@ import com.dependencies.dragons.dnd.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -59,6 +61,17 @@ public class MainController {
     @GetMapping("/")
     public String displayHomepage() {   
         return "home";
+    }
+    
+    @GetMapping("createnewuser")
+    public String createNewUser() {
+        return "createnewuser";
+    }
+    
+    @PostMapping("createnewuser")
+    public String createNewUser(User toAdd) {
+        user.save(toAdd);
+        return "redirect:/login";
     }
     
 }
