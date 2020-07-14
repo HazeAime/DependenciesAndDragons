@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="col">
                     <h3 class="border border-dark bg text-center" style="color: whitesmoke">Character Details</h3>
-                    <div class="border border-dark bg" style="height:500px; overflow-y: scroll; overflow-x: hidden; ">
+                    <div class="border border-dark bg" style="height:600px; overflow-y: scroll; overflow-x: hidden; ">
                         <div class="row">
                             <div class="col-3 offset-1" style="border: solid whitesmoke; text-align:center;">
                                 <h5 style="color: whitesmoke; font-weight: bold;">Character Name: </h5>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="row">
-                                    <div class="col-6" style="border: solid whitesmoke; color:whitesmoke">
+                                    <div class="col-6" style="border: solid whitesmoke; color:whitesmoke; text-align: center">
                                         <h6>Saving Throws</h6>
                                         <label for="stStr">Strength: </label>
                                         <span name="stStr" th:text="${character.stStrength}">str</span><br/>
@@ -187,11 +187,11 @@
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
                         <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
                     </div>
-                    <a href="characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
+                        <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
                         <a href="/createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
                     </div>
-                    <a href="campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
+                        <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
                         <a href="/characterapproval" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
                     </div>
