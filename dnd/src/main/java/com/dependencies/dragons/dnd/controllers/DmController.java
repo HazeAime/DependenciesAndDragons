@@ -130,6 +130,7 @@ public class DmController {
         return "approvecharacter";
     }
     
+    //cannot hit method
     @PostMapping("approvecharacter")
     public String updateApproval(Integer[] charIds){
         for (Integer id: charIds) {
