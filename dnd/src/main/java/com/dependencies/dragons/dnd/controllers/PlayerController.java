@@ -16,6 +16,8 @@ import com.dependencies.dragons.dnd.repositories.RaceRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,7 +107,8 @@ public class PlayerController {
     
     @GetMapping("characterdetails/{id}")
     public String displayCharacterDetails(Model model, @PathVariable Integer id){
-        model.addAttribute("character", dndChar.findById(id));
+        DndCharacter char2 = dndChar.findById(id).orElse(null);
+        model.addAttribute("character", char2);
         return "characterdetails";
     }
     
