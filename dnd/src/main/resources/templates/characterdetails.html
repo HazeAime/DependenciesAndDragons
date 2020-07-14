@@ -2,290 +2,287 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Dependencies & Dragons</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-        }
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>Dependencies & Dragons</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+            }
 
-        .bg {
-            background: rgba(0, 0, 0, .8);
-        }
+            .bg {
+                background: rgba(0, 0, 0, .8);
+            }
 
-        body {
-            background: url("https://i.imgur.com/fsnPRB9.jpg");
-            background-size: cover;
-            height: 100%;
-        }
+            body {
+                background: url("https://i.imgur.com/fsnPRB9.jpg");
+                background-size: cover;
+                height: 100%;
+            }
 
-        footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 2.5rem;
-            /* Footer height */
-        }
+            footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 2.5rem;
+                /* Footer height */
+            }
 
-        .container {
-            position: relative;
-            min-height: 100vh;
-        }
-    </style>
-</head>
+            .container {
+                position: relative;
+                min-height: 100vh;
+            }
+        </style>
+    </head>
 
-<body>
-    <div class="container">
-        <div class="row m-4">
-            <div class="col">
-                <a class="btn btn-outline-danger btn-block bg" style="font-size: 50px; font-weight: bold"
-                    href="/">Dependencies & Dragons</a>
+    <body>
+        <div class="container">
+            <div class="row m-4">
+                <div class="col">
+                    <a class="btn btn-outline-danger btn-block bg" style="font-size: 50px; font-weight: bold"
+                       href="/">Dependencies & Dragons</a>
+                </div>
             </div>
-        </div>
-        <div class="row m-4 border border-dark bg">
-            <div class="col text-center m-2">
-                <a href="campaignresults" class="btn btn-outline-danger btn-lg">Campaign Results</a>
+            <div class="row m-4 border border-dark bg">
+                <div class="col text-center m-2">
+                    <a href="campaignresults" class="btn btn-outline-danger btn-lg">Campaign Results</a>
+                </div>
+                <div class="col text-center m-2">
+                    <a href="dndbasics" class="btn btn-outline-danger btn-lg">D&D Basics</a>
+                </div>
+                <div class="col text-center m-2">
+                    <a href="aboutdms" class="btn btn-outline-danger btn-lg">About the DMs</a>
+                </div>
+                <div sec:authorize="!isAuthenticated()" class="col text-center m-2">
+                    <a href="login" class="btn btn-outline-danger btn-lg">Login</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="col text-center m-2">
+                    <form class="form-inline" method="POST" action="/logout">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="btn btn-outline-danger btn-lg" id="submit" type="submit">
+                            Logout
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="col text-center m-2">
-                <a href="dndbasics" class="btn btn-outline-danger btn-lg">D&D Basics</a>
-            </div>
-            <div class="col text-center m-2">
-                <a href="aboutdms" class="btn btn-outline-danger btn-lg">About the DMs</a>
-            </div>
-            <div sec:authorize="!isAuthenticated()" class="col text-center m-2">
-                <a href="login" class="btn btn-outline-danger btn-lg">Login</a>
-            </div>
-            <div sec:authorize="isAuthenticated()" class="col text-center m-2">
-                <form class="form-inline" method="POST" action="/logout">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    <button class="btn btn-outline-danger btn-lg" id="submit" type="submit">
-                        Logout
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <h3 class="border border-dark bg text-center" style="color: whitesmoke">Character Details</h3>
-                <div class="border border-dark bg" style="height:500px; overflow-y: scroll;">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <table style="border: solid whitesmoke; margin:10px">
-                                <tr>
-                                    <th style="color: whitesmoke; padding-right: 10px">Character Name:</th>
-                                    <td th:text="${character.characterName}"
-                                        style="color: whitesmoke">Fill with name</td>
-                                </tr>
-                            </table>
+            <div class="row">
+                <div class="col">
+                    <h3 class="border border-dark bg text-center" style="color: whitesmoke">Character Details</h3>
+                    <div class="border border-dark bg" style="height:500px; overflow-y: scroll;">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <table style="border: solid whitesmoke; margin:10px">
+                                    <tr>
+                                        <th style="color: whitesmoke; padding-right: 10px">Character Name:</th>
+                                        <td th:text="${character.characterName}"
+                                            style="color: whitesmoke">Fill with name</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col align-self-center">
+                                <table style="border: solid whitesmoke; margin:5px; margin:10px">
+                                    <tr>
+                                        <th style="color:whitesmoke; padding-right:5px">Class</th>
+                                        <th style="color:whitesmoke; padding-right:5px">Level</th>
+                                        <th style="color:whitesmoke; padding-right:5px">Player Name</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="color:whitesmoke; padding-right:5px"
+                                            th:text="${character.characterClass.name}">Character class</td>
+                                        <td style="color:whitesmoke; padding-right:5px" th:text="${character.characterLvl}">
+                                            Character Level</td>
+                                        <td style="color:whitesmoke; padding-right:5px" th:text="${character.playerName}">
+                                            Player Name</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="color:whitesmoke; padding-right:5px">Race</th>
+                                        <th style="color:whitesmoke; padding-right:5px">Alignment</th>
+                                        <th style="color:whitesmoke; padding-right:5px">XP</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="color:whitesmoke; padding-right:5px"
+                                            th:text="${character.characterRace.name}">Race</td>
+                                        <td style="color:whitesmoke; padding-right:5px"
+                                            th:text="${character.alignment.name}">Alginment</td>
+                                        <td style="color:whitesmoke; padding-right:5px" th:text="${character.xp}">XP</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-<!--                        <div class="col align-self-center">
-                            <table style="border: solid whitesmoke; margin:5px; margin:10px">
-                                <tr>
-                                    <th style="color:whitesmoke; padding-right:5px">Class</th>
-                                    <th style="color:whitesmoke; padding-right:5px">Level</th>
-                                    <th style="color:whitesmoke; padding-right:5px">Player Name</th>
-                                </tr>
-                                <tr>
-                                    <td style="color:whitesmoke; padding-right:5px"
-                                        th:text="${character.characterClass.name}">Character class</td>
-                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.characterLvl}">
-                                        Character Level</td>
-                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.playerName}">
-                                        Player Name</td>
-                                </tr>
-                                <tr>
-                                    <th style="color:whitesmoke; padding-right:5px">Race</th>
-                                    <th style="color:whitesmoke; padding-right:5px">Alignment</th>
-                                    <th style="color:whitesmoke; padding-right:5px">XP</th>
-                                </tr>
-                                <tr>
-                                    <td style="color:whitesmoke; padding-right:5px"
-                                        th:text="${character.characterRace.name}">Race</td>
-                                    <td style="color:whitesmoke; padding-right:5px"
-                                        th:text="${character.alignment.name}">Alginment</td>
-                                    <td style="color:whitesmoke; padding-right:5px" th:text="${character.xp}">XP</td>
-                                </tr>
-                            </table>
+                        <div class="row"><!--
+
+                            -->                            <div class="col align-self-center"><!--
+                                -->                                <div class="row">
+                                    <table style="border: solid whitesmoke; margin:10px; min-height: 250px">
+                                        <tr>
+                                            <th style="color:whitesmoke">Strength</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.strength}" style="color:whitesmoke">Strength</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Dexterity</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.dexterity}" style="color:whitesmoke">Dexterity</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Constitution</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.constitution}" style="color:whitesmoke">Constitution
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Intelligence</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.intelligence}" style="color:whitesmoke">Intelligence
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Wisdom</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.wisdom}" style="color:whitesmoke">wisdom</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Charisma</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.charisma}" style="color:whitesmoke">Charisma</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <table style="border: solid whitesmoke; text-align:center">
+                                        <th style="color:whitesmoke; padding-left:10px">Money</th>
+                                        <td th:text="${character.money}" style="color:whitesmoke; padding-left:10px">Money
+                                        </td>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col align-self-center">
+                                <div class="row">
+                                    <table style="border: solid whitesmoke; margin:10px; text-align:center">
+                                        <tr>
+                                            <th style="color:whitesmoke">Strength Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stStrength}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Dexterity Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stDexterity}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Constitution Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stConstitution}" style="color:whitesmoke">Number
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Intelligence Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stIntelligence}" style="color:whitesmoke">Number
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Wisdom Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stWisdom}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Charisma Save</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.stCharisma}" style="color:whitesmoke">Number</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="row">
+
+                                    <table style="border: solid whitesmoke; text-align:center">
+                                        <tr>
+                                            <th style="color:whitesmoke">Associated Campaigns</th>
+                                        </tr>
+                                        <tr>
+                                            <th style="color:whitesmoke">Campaign Id</th>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:whitesmoke" th:text="${character.campaign.id}">Campaign
+                                                Id</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>                          
+                            <div class="col align-self-center">
+                                <div class="row">
+                                    <table style="border: solid whitesmoke; text-align:center; margin-bottom:10px">
+                                        <th style="color:whitesmoke">Armor Class</th>
+                                        <td th:text="${character.armorClass}" style="color:whitesmoke">Armor Class</td>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <table
+                                        style="border:solid whitesmoke; text-align:center; min-height:300px; min-width:200px">
+                                        <tr>
+                                            <th style="color:whitesmoke">Backstory</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${character.backstory}" style="color:whitesmoke">Backstory</td>
+                                        </tr>
+                                    </table>
+                                </div>                    
+                            </div>
+
+
                         </div>
+
                     </div>
-                    <div class="row">
+                </div>
 
-                        <div class="col align-self-center">
-                            <div class="row">
-                                <table style="border: solid whitesmoke; margin:10px; min-height: 250px">
-                                    <tr>
-                                        <th style="color:whitesmoke">Strength</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.strength}" style="color:whitesmoke">Strength</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Dexterity</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.dexterity}" style="color:whitesmoke">Dexterity</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Constitution</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.constitution}" style="color:whitesmoke">Constitution
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Intelligence</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.intelligence}" style="color:whitesmoke">Intelligence
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Wisdom</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.wisdom}" style="color:whitesmoke">wisdom</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Charisma</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.charisma}" style="color:whitesmoke">Charisma</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <table style="border: solid whitesmoke; text-align:center">
-                                    <th style="color:whitesmoke; padding-left:10px">Money</th>
-                                    <td th:text="${character.money}" style="color:whitesmoke; padding-left:10px">Money
-                                    </td>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="col align-self-center">
-                            <div class="row">
-                                <table style="border: solid whitesmoke; margin:10px; text-align:center">
-                                    <tr>
-                                        <th style="color:whitesmoke">Strength Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stStrength}" style="color:whitesmoke">Number</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Dexterity Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stDexterity}" style="color:whitesmoke">Number</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Constitution Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stConstitution}" style="color:whitesmoke">Number
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Intelligence Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stIntelligence}" style="color:whitesmoke">Number
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Wisdom Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stWisdom}" style="color:whitesmoke">Number</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Charisma Save</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.stCharisma}" style="color:whitesmoke">Number</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="row">
-
-                                <table style="border: solid whitesmoke; text-align:center">
-                                    <tr>
-                                        <th style="color:whitesmoke">Associated Campaigns</th>
-                                    </tr>
-                                    <tr>
-                                        <th style="color:whitesmoke">Campaign Id</th>
-                                    </tr>
-                                    <tr>
-                                        <td style="color:whitesmoke" th:text="${character.campaignId}">Campaign
-                                            Id</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-
-                        </div>
-                        <div class="col align-self-center">
-                            <div class="row">
-                                <table style="border: solid whitesmoke; text-align:center; margin-bottom:10px">
-                                    <th style="color:whitesmoke">Armor Class</th>
-                                    <td th:text="${character.armorClass.name}" style="color:whitesmoke">armor
-                                        class</td>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <table
-                                    style="border:solid whitesmoke; text-align:center; min-height:300px; min-width:200px">
-                                    <tr>
-                                        <th style="color:whitesmoke">Backstory</th>
-                                    </tr>
-                                    <tr>
-                                        <td th:text="${character.backstory}" style="color:whitesmoke">Backstory</td>
-                                    </tr>
-                                </table>
-                            </div>-->
-
-                        </div>
-
+                <div class="col-3 text-center border border-dark bg">
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
+                        <a href="createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
                     </div>
-
-                </div>
-            </div>
-
-            <div class="col-3 text-center border border-dark bg">
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
-                    <a href="createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
-                </div>
-                <a href="characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                    <a href="createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
-                </div>
-                <a href="campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                    <a href="characterapproval" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
-                </div>
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                    <a href="campaignapproval" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
-                </div>
-                <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                    <a href="users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
+                    <a href="characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
+                        <a href="createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
+                    </div>
+                    <a href="campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
+                        <a href="characterapproval" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
+                    </div>
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                        <a href="campaignapproval" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
+                    </div>
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                        <a href="users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-</body>
+    </body>
 
 </html>
