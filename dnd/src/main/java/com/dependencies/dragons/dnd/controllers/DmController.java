@@ -17,6 +17,7 @@ import com.dependencies.dragons.dnd.repositories.RaceRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,14 @@ public class DmController {
     
     @GetMapping("campaigns")
     public String displayAllCampaigns(Model model) {  
-        model.addAttribute("campaigns", campaign.findAll());
+        List<DndCampaign> allCampaigns = campaign.findAll();
+        List<DndCampaign> approvedList = new ArrayList<>();
+        for (int i=0; i<allCampaigns.size(); i++) {
+            if (allCampaigns.get(i).isApproval()== true) {
+                approvedList.add(allCampaigns.get(i));
+            }
+        }
+        model.addAttribute("campaigns", approvedList);
         return "campaigns";
     }
     

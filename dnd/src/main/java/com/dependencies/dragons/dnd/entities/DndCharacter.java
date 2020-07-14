@@ -24,6 +24,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DndCharacter {
 
+    @Column(nullable = false)
+    private boolean approval;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
@@ -645,6 +648,20 @@ public class DndCharacter {
      */
     public void setAllAttackOrSpells(List<AttackOrSpell> allAttackOrSpells) {
         this.allAttackOrSpells = allAttackOrSpells;
+    }
+
+    /**
+     * @return the approval
+     */
+    public boolean isApproval() {
+        return approval;
+    }
+
+    /**
+     * @param approval the approval to set
+     */
+    public void setApproval(boolean approval) {
+        this.approval = approval;
     }
     
     

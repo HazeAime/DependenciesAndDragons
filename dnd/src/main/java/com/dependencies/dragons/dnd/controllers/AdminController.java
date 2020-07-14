@@ -10,6 +10,7 @@ import com.dependencies.dragons.dnd.entities.DndCharacter;
 import com.dependencies.dragons.dnd.repositories.DndCampaignRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +44,22 @@ public class AdminController {
 
     @GetMapping("approvecampaign")
     public String displayCharacterApproval(Model model) {
-        model.addAttribute("campaigns", campaign.findAll());
-        return "approvecharacter";
+
+        List<DndCampaign> allCampaigns = campaign.findAll();
+        List<DndCampaign> unapproved = new ArrayList<>();
+        for (int i = 0; i < allCampaigns.size(); i++) {
+            if (allCampaigns.get(i).isApproval() == false) {
+                unapproved.add(allCampaigns.get(i));
+            }
+        }
+        model.addAttribute("campaigns", unapproved);
+        return "approvecampaign";
     }
 
     @PostMapping("approvecampaign")
     public String updateApproval(List<DndCampaign> campaigns) {
         campaign.saveAll(campaigns);
-        return "redirect:/approvecharacter";
+        return "redirect:/approvecampaign";
     }
 
 }

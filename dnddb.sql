@@ -62,6 +62,7 @@ create table Alignment (
     
 create table DndCampaign (
 	id int primary key auto_increment,
+    approval boolean default false not null,
     map varchar(100) not null,
     `description` varchar(250) not null,
     userId int not null,
@@ -202,8 +203,9 @@ insert Alignment (`name`) values
 	('Neutral Evil'),
 	('Chaotic Evil');
     
-    insert into DndCampaign (map, `description`, userId) values
-	('linktomap', 'This is a test description of my amazing campaign', 2);
+    insert into DndCampaign (approval, map, `description`, userId) values
+	(true, 'linktomap', 'This is a test description of my amazing campaign', 2), 
+    (false, 'linktomap', 'Unapproved!',2);
     
     insert into DndCharacter (
 		id,

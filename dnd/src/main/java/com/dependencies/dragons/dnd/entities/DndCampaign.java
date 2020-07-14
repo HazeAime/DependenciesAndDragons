@@ -23,6 +23,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DndCampaign {
 
+    @Column(nullable=false)
+    private boolean approval;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
@@ -128,5 +131,19 @@ public class DndCampaign {
      */
     public void setDmAffiliated(User dmAffiliated) {
         this.dmAffiliated = dmAffiliated;
+    }
+
+    /**
+     * @return the approval
+     */
+    public boolean isApproval() {
+        return approval;
+    }
+
+    /**
+     * @param approval the approval to set
+     */
+    public void setApproval(boolean approval) {
+        this.approval = approval;
     }
 }

@@ -71,44 +71,61 @@ and open the template in the editor.
             </div>
             <div class="row">
 
-                <!--                <div class="col">
-                                    <h3 class="border border-dark bg text-center" style="color: whitesmoke">The Latest News</h3>
-                                    <div  class="border border-dark bg" style="height:300px; overflow-y: scroll;">
-                                        <h5 style="color: whitesmoke;">Campaign News</h5><hr/>
-                                        <p style="color: whitesmoke;">7/10/2020</p>
-                                        <p style="color: whitesmoke;">This is what happened last time...</p>
-                                    </div>
-                                </div>-->
+                <div class="row">
+                    <div class="col">
+                        <h3 class="border border-dark bg text-center" style="color: whitesmoke">Campaigns</h3>
+                        <div  class="border border-dark bg" style="height:500px; overflow-y: scroll;">
+                            <table class="table text-center">
+                                <thead>
+                                    <tr style="color: whitesmoke">
+                                        <th>ID</th>
+                                        <th>Campaign DM</th>
+                                        <th>Campaign Details</th>
+                                        <th>Approve</th>
 
-                <div class="col-3 text-center border border-dark bg">
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
-                        <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="campaign : ${campaigns}">
+                                        <td th:text="${campaign.id}" style="color: whitesmoke">ID</td>
+                                        <td th:text="${campaign.dmAffiliated.userName}" style="color: whitesmoke">DM</td>
+                                        <td><a class="btn-outline-danger " href="#" th:href="${'/campaigndetails/' + campaign.id}">Details</a></td>
+                                        <td><a class="btn-outline-danger " href="#" th:href="${'/updatecampaign/' + campaign.id}">Edit</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                        <a href="/createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
-                    </div>
-                    <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
-                        <a href="/approvecharacter" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
-                    </div>
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                        <a href="/approvecampaign" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
-                    </div>
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                        <a href="/users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
+
+                    <div class="col-3 text-center border border-dark bg">
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
+                            <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
+                        </div>
+                        <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
+                            <a href="/createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
+                        </div>
+                        <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
+                            <a href="/approvecharacter" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
+                        </div>
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                            <a href="/approvecampaign" class="btn btn-outline-danger btn-md m-3">Approve Campaigns</a>
+                        </div>
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                            <a href="/users" class="btn btn-outline-danger btn-md m-3">View All Users</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
-                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
-        crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
-        crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+            crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+            crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+            crossorigin="anonymous"></script>
     </body>
 </html>
