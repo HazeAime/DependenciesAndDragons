@@ -238,8 +238,15 @@ insert Alignment (`name`) values
 		(1, true, 'Legolas', 'David Smelser', 1, 0, 1, 1, 1, 16, 20, 12, 12, 14, 10, 11, 13, 9, 8, 8, 3, 0, "Programming teacher by day, sharpshooting Ranger by night", "d10", 20, 1),
         (2, false, 'Bilbo', 'Kipp Graham', 1, 0, 1, 1, 1, 16, 20, 12, 12, 14, 10, 11, 13, 9, 8, 8, 3, 0, "Career guru by day, happy hobbit by night", "d10", 20, 1);
     
+insert into Character_Item (characterId, itemId) values
+	(1, 1);
     
-
+insert into Character_Skill (characterId, skillId) values
+	(1, 3);
+    
+insert into Character_AttackOrSpell (characterId, attackOrSpellId) values
+	(1, 3);
+    
 UPDATE `User` SET `password` = '$2a$10$S8nFUMB8YIEioeWyap24/ucX.dC6v9tXCbpHjJVQUkrXlrH1VLaAS' WHERE id = 1;
 UPDATE `User` SET `password` = '$2a$10$S8nFUMB8YIEioeWyap24/ucX.dC6v9tXCbpHjJVQUkrXlrH1VLaAS' WHERE id = 2;
 UPDATE `User` SET `password` = '$2a$10$S8nFUMB8YIEioeWyap24/ucX.dC6v9tXCbpHjJVQUkrXlrH1VLaAS' WHERE id = 3;
