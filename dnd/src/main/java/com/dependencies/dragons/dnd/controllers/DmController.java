@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.daos.dndCampaignDao;
 import com.dependencies.dragons.dnd.entities.DndCampaign;
 import com.dependencies.dragons.dnd.entities.DndCharacter;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
@@ -20,6 +21,7 @@ import com.dependencies.dragons.dnd.repositories.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,6 +66,9 @@ public class DmController {
     @Autowired
     UserRepository user;
     
+    @Autowired
+    dndCampaignDao campDao;
+    
     @GetMapping("createcampaign")
     public String createCampaign(Model model) {
         model.addAttribute("users", user.findAll());
@@ -71,7 +76,11 @@ public class DmController {
     }
     
     @PostMapping("createcampaign")
-    public String createCampaign(DndCampaign toAdd) {
+    public String createCampaign(DndCampaign toAdd, HttpServletRequest request) {
+        String dmId = request.getParameter("dmId");
+        toAdd.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
+        Integer newId = campDao.getNewId(toAdd);
+        toAdd.setId(newId);
         campaign.save(toAdd);
         return "redirect:/campaigns";
     }

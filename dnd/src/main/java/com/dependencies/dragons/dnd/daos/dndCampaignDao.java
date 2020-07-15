@@ -14,14 +14,5 @@ import java.util.List;
  */
 public interface dndCampaignDao {
 
-    public DndCampaign createCampaign();
-
-    public DndCampaign getCampaignById(int id);
-
-    public List<DndCampaign> getAllCampaigns();
-
-    public void updateCampaign(DndCampaign toEdit);
-
-    public void deleteCampaign(DndCampaign toRemove);
-
+    public Integer getNewId(DndCampaign toAdd);
 }

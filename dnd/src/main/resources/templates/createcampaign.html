@@ -83,8 +83,8 @@ and open the template in the editor.
                     <form action="createcampaign" method="POST">
                         <div class="col">
                             <div class="border border-dark bg text-center m-1">
-                                <label for="dm" style="color: whitesmoke">Campaign DM: </label>
-                                <select name="dm" id="dmSelect">
+                                <label for="dmId" style="color: whitesmoke">Campaign DM: </label>
+                                <select name="dmId" id="dmId">
                                     <option value="0">Select a DM</option>
                                     <option th:each="dm : ${users}" th:value="${dm.id}" th:text="${dm.userName}"></option>
                                 </select>
@@ -92,9 +92,9 @@ and open the template in the editor.
                             <div class="row">
                                 <div class="col border border-dark bg text-center m-1" style="height:300px;">
                                     <h5 style="color: whitesmoke;">Map</h5>
-                                    <label for="campaignMap" style="color: whitesmoke;">Input a map image here: </label>
+                                    <label for="map" style="color: whitesmoke;">Input a map image here: </label>
                                     <input class="border border-dark bg" style="color: whitesmoke" type="file"
-                                           id="campaignMap" name="campaignMap" accept="image/*" />
+                                           id="map" name="map" accept="image/*" />
                                 </div>
                                 <div class="col border border-dark bg text-center m-1" style="height:300px;">
                                     <h5 style="color: whitesmoke;">Description</h5>
