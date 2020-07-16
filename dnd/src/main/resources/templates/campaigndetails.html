@@ -93,7 +93,9 @@ and open the template in the editor.
                             <div class="col border border-dark bg text-center m-1" style="height:300px;">
                                 <h5 style="color: whitesmoke;">Description</h5>
                                 <div class="row">
-                                    <p class="border border-dark bg text-center m-1" style="color: whitesmoke; height: 250px; width: 100%;">Campaign Description</p>
+                                    <p class="border border-dark bg text-center m-1" style="color: whitesmoke; height: 250px; width: 100%;"
+                                       th:text="${campaign.description}">
+                                        Campaign Description</p>
                                 </div>
                             </div>
                         </div>
