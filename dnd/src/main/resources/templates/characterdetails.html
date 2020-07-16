@@ -181,17 +181,74 @@
                                 <p th:text="${character.backstory}">backstory</p>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-10 offset-1" style="border: solid whitesmoke; color:whitesmoke; text-align:center" >
+                                <h5 style="color: whitesmoke">Items</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: whitesmoke">
+                                            <th>Item Name</th>
+                                            <th>Item Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="item : ${character.allItems}">
+                                            <td th:text="${item.name}">Item Name</td>
+                                            <td th:text="${item.description}">Item Description</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 offset-1" style="border: solid whitesmoke; color:whitesmoke; text-align:center" >
+                                <h5 style="color: whitesmoke">Skills</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: whitesmoke">
+                                            <th>Skill Name</th>
+                                            <th>Skill Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="skill : ${character.allSkills}">
+                                            <td th:text="${skill.name}">Skill Name</td>
+                                            <td th:text="${skill.description}">Skill Description</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 offset-1" style="border: solid whitesmoke; color:whitesmoke; text-align:center" >
+                                <h5 style="color: whitesmoke">Attacks and Spells</h5>
+                                <table class="table">
+                                    <thead>
+                                        <tr style="color: whitesmoke">
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="att : ${character.allAttackOrSpells}">
+                                            <td th:text="${att.name}">Attack Name</td>
+                                            <td th:text="${att.description}">Attack Description</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-3 text-center border border-dark bg">
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
                         <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>
                     </div>
-                        <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
+                    <a href="/characters" class="btn btn-outline-danger btn-md m-3">View All Characters</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
                         <a href="/createcampaign" class="btn btn-outline-danger btn-md m-3">Create New Campaign</a>
                     </div>
-                        <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
+                    <a href="/campaigns" class="btn btn-outline-danger btn-md m-3">View All Campaigns</a>
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_DM')">
                         <a href="/characterapproval" class="btn btn-outline-danger btn-md m-3">Approve Characters</a>
                     </div>
