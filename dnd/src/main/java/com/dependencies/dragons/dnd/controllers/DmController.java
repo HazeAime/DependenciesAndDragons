@@ -141,12 +141,10 @@ public class DmController {
     
     //cannot hit method
     @PostMapping("approvecharacter")
-    public String updateApproval(Integer[] charIds){
-        for (Integer id: charIds) {
-            DndCharacter dndCharacter = dndChar.findById(id).orElse(null);
-            dndCharacter.setApproval(true);
-            dndChar.save(dndCharacter);
-        }
+    public String updateApproval(Integer charId){
+        DndCharacter toApprove = dndChar.findById(charId).orElse(null);
+        toApprove.setApproval(true);
+        dndChar.save(toApprove);
         return "redirect:/approvecharacter";
     }
     
