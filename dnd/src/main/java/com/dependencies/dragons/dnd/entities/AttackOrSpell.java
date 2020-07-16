@@ -30,15 +30,15 @@ public class AttackOrSpell {
     private String description;
 
     @Column(nullable = false)
-    private Integer damage;
+    private String damage;
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 31 * hash + Objects.hashCode(this.id);
-        hash = 31 * hash + Objects.hashCode(this.name);
-        hash = 31 * hash + Objects.hashCode(this.description);
-        hash = 31 * hash + Objects.hashCode(this.damage);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + Objects.hashCode(this.damage);
         return hash;
     }
 
@@ -60,10 +60,10 @@ public class AttackOrSpell {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.damage, other.damage)) {
             return false;
         }
-        if (!Objects.equals(this.damage, other.damage)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
@@ -114,14 +114,14 @@ public class AttackOrSpell {
     /**
      * @return the damage
      */
-    public Integer getDamage() {
+    public String getDamage() {
         return damage;
     }
 
     /**
      * @param damage the damage to set
      */
-    public void setDamage(Integer damage) {
+    public void setDamage(String damage) {
         this.damage = damage;
     }
 

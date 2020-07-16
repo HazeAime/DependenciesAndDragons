@@ -74,6 +74,8 @@ public class AlignmentRepositoryTest {
 
     @BeforeEach
     public void setUp() {
+        dndChar.deleteAll();
+        campaign.deleteAll();
         user.deleteAll();
         role.deleteAll();
         charClass.deleteAll();
@@ -81,9 +83,8 @@ public class AlignmentRepositoryTest {
         skill.deleteAll();
         attkOrSpl.deleteAll();
         race.deleteAll();
+        
         align.deleteAll();
-        campaign.deleteAll();
-        dndChar.deleteAll();
         
         
         
