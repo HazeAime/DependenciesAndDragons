@@ -24,27 +24,27 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class AdminController {
-
+    
     @Autowired
     UserRepository user;
-
+    
     @Autowired
     DndCampaignRepository campaign;
-
+    
     @GetMapping("admin")
     public String displayAdminScreen() {
         return "admin";
     }
-
+    
     @GetMapping("users")
     public String displayUsers(Model model) {
         model.addAttribute("users", user.findAll());
         return "users";
     }
-
+    
     @GetMapping("approvecampaign")
     public String displayCharacterApproval(Model model) {
-
+        
         List<DndCampaign> allCampaigns = campaign.findAll();
         List<DndCampaign> unapproved = new ArrayList<>();
         for (int i = 0; i < allCampaigns.size(); i++) {
@@ -55,12 +55,13 @@ public class AdminController {
         model.addAttribute("campaigns", unapproved);
         return "approvecampaign";
     }
-
+    
     @PostMapping("approvecampaign")
-    public String updateApproval(List<DndCampaign> campaigns) {
-        
-        campaign.saveAll(campaigns);
+    public String updateApproval(Integer campId) {
+        DndCampaign toApprove =campaign.findById(campId).orElse(null);
+        toApprove.setApproval(true);
+        campaign.save(toApprove);
         return "redirect:/approvecampaign";
     }
-
+    
 }
