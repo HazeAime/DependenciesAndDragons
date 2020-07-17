@@ -28,4 +28,18 @@ public class DndCampaignDaoDB implements dndCampaignDao {
         return newId;
 
     }
+
+    @Override
+    public void editCampaign(DndCampaign toEdit) {
+        final String editCamp = "UPDATE DndCampaign SET description=?, approval=?,"
+                + "userId=?, map=? WHERE id=?";
+        template.update(editCamp,
+                toEdit.getDescription(),
+                toEdit.isApproval(),
+                toEdit.getDmAffiliated().getId(),
+                toEdit.getMap(),
+                toEdit.getId());
+    }
+    
+    
 }

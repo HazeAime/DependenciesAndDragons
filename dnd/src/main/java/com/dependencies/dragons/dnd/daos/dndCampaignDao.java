@@ -15,4 +15,6 @@ import java.util.List;
 public interface dndCampaignDao {
 
     public Integer getNewId(DndCampaign toAdd);
+    
+    public void editCampaign(DndCampaign toEdit);
 }

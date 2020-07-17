@@ -8,6 +8,7 @@ package com.dependencies.dragons.dnd.controllers;
 import com.dependencies.dragons.dnd.daos.dndCampaignDao;
 import com.dependencies.dragons.dnd.entities.DndCampaign;
 import com.dependencies.dragons.dnd.entities.DndCharacter;
+import com.dependencies.dragons.dnd.entities.User;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -102,18 +103,29 @@ public class DmController {
     public String updateCampaign(Model model, @PathVariable Integer id) {
         DndCampaign camp = campaign.findById(id).orElse(null);
         model.addAttribute("campaign", camp);
-        model.addAttribute("users", user.findAll());
-
+        List<User> userList = user.findAll();
+//        List<User> dmUsers = new ArrayList <>();
+//        for (User u : userList) {
+//            if (u.getRoles().contains("ROLE_DM")){
+//                dmUsers.add(u);
+//            }
+//        }
+        
+        model.addAttribute("users", userList);
         return "updatecampaign";
     }
 
     @PostMapping("updatecampaign")
-    public String updateCampaign(Integer campId) {
-        DndCampaign toUpdate = campaign.findById(campId).orElse(null);
+    public String updateCampaign(DndCampaign toUpdate, HttpServletRequest request) {
+        String campMap = request.getParameter("campaignMap");
+        toUpdate.setMap(campMap);
+        String dmId = request.getParameter("dm");
+        toUpdate.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
+        String id = request.getParameter("campId");
+        toUpdate.setId(Integer.parseInt(id));
+        toUpdate.setApproval(true);
+        campDao.editCampaign(toUpdate);
         campaign.save(toUpdate);
-        
-        //It is not saving the changes...fyi
-        
         return "redirect:/campaigns";
     }
 
