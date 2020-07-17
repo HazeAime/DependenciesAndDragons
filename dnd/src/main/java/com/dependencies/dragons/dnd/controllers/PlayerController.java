@@ -21,6 +21,7 @@ import com.dependencies.dragons.dnd.repositories.RaceRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -104,8 +105,15 @@ public class PlayerController {
     }
     
     @GetMapping("characters")
-    public String displayAllCharacters(Model model) {  
-        model.addAttribute("characters", dndChar.findAll());
+    public String displayAllCharacters(Model model) {
+        List<DndCharacter> allCharacters = dndChar.findAll();
+        List<DndCharacter> approvedList = new ArrayList<>();
+        for (int i = 0; i < allCharacters.size(); i++) {
+            if (allCharacters.get(i).isApproval() == true) {
+                approvedList.add(allCharacters.get(i));
+            }
+        }
+        model.addAttribute("characters", approvedList);
         return "characters";
     }
     
