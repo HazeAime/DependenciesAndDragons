@@ -35,46 +35,46 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class DmController {
-    
+
     @Autowired
     AlignmentRepository align;
-    
-    @Autowired 
+
+    @Autowired
     AttackOrSpellRepository attkOrSpl;
-    
+
     @Autowired
     CharacterClassRepository charClass;
-    
+
     @Autowired
     DndCampaignRepository campaign;
-    
+
     @Autowired
     DndCharacterRepository dndChar;
-    
+
     @Autowired
     ItemRepository item;
-    
+
     @Autowired
     RaceRepository race;
-    
+
     @Autowired
     RoleRepository role;
-    
+
     @Autowired
     SkillRepository skill;
-    
+
     @Autowired
     UserRepository user;
-    
+
     @Autowired
     dndCampaignDao campDao;
-    
+
     @GetMapping("createcampaign")
     public String createCampaign(Model model) {
         model.addAttribute("users", user.findAll());
         return "createcampaign";
     }
-    
+
     @PostMapping("createcampaign")
     public String createCampaign(DndCampaign toAdd, HttpServletRequest request) {
         String dmId = request.getParameter("dmId");
@@ -84,42 +84,46 @@ public class DmController {
         campaign.save(toAdd);
         return "redirect:/campaigns";
     }
-    
+
     @GetMapping("campaigns")
-    public String displayAllCampaigns(Model model) {  
+    public String displayAllCampaigns(Model model) {
         List<DndCampaign> allCampaigns = campaign.findAll();
         List<DndCampaign> approvedList = new ArrayList<>();
-        for (int i=0; i<allCampaigns.size(); i++) {
-            if (allCampaigns.get(i).isApproval()== true) {
+        for (int i = 0; i < allCampaigns.size(); i++) {
+            if (allCampaigns.get(i).isApproval() == true) {
                 approvedList.add(allCampaigns.get(i));
             }
         }
         model.addAttribute("campaigns", approvedList);
         return "campaigns";
     }
-    
+
     @GetMapping("updatecampaign/{id}")
     public String updateCampaign(Model model, @PathVariable Integer id) {
         DndCampaign camp = campaign.findById(id).orElse(null);
         model.addAttribute("campaign", camp);
         model.addAttribute("users", user.findAll());
-        
+
         return "updatecampaign";
     }
-    
+
     @PostMapping("updatecampaign")
-    public String updateCampaign(DndCampaign toEdit) {
-        campaign.save(toEdit);
+    public String updateCampaign(Integer campId) {
+        DndCampaign toUpdate = campaign.findById(campId).orElse(null);
+        campaign.save(toUpdate);
+        
+        //It is not saving the changes...fyi
+        
         return "redirect:/campaigns";
     }
-    
+
     @GetMapping("campaigndetails/{id}")
-    public String displayCampaignDetails(Model model, @PathVariable Integer id){
+    public String displayCampaignDetails(Model model, @PathVariable Integer id) {
         DndCampaign camp = campaign.findById(id).orElse(null);
         model.addAttribute("campaign", camp);
         return "campaigndetails";
     }
-    
+
 //    @GetMapping("campaign/characters")
 //    public String viewCharacters(Model model) {
 //        model.addAttribute("campaign", campaign)
@@ -130,7 +134,7 @@ public class DmController {
     public String displayCharacterApproval(Model model) {
         List<DndCharacter> allChars = dndChar.findAll();
         List<DndCharacter> toPassIn = new ArrayList<>();
-        for (DndCharacter dndCharacter: allChars) {
+        for (DndCharacter dndCharacter : allChars) {
             if (!dndCharacter.isApproval()) {
                 toPassIn.add(dndCharacter);
             }
@@ -138,14 +142,14 @@ public class DmController {
         model.addAttribute("characters", toPassIn);
         return "approvecharacter";
     }
-    
+
     //cannot hit method
     @PostMapping("approvecharacter")
-    public String updateApproval(Integer charId){
+    public String updateApproval(Integer charId) {
         DndCharacter toApprove = dndChar.findById(charId).orElse(null);
         toApprove.setApproval(true);
         dndChar.save(toApprove);
         return "redirect:/approvecharacter";
     }
-    
+
 }

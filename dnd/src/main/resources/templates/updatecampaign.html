@@ -97,14 +97,17 @@ and open the template in the editor.
                                            id="campaignMap" name="campaignMap" accept="image/*" />
                                 </div>
                                 <div class="col border border-dark bg text-center m-1" style="height:300px;">
-                                    <h5 style="color: whitesmoke;" th:text="${campaign.description}">Description</h5>
+                                    <h5 style="color: whitesmoke;">Description</h5>
                                     <div class="row">
-                                        <textarea name="description" id="descriptionInput" class="form-control m-1"
-                                                  style="height: 250px; resize: none;"></textarea>
+                                        <input type="textarea" name="description" id="description" class="form-control m-1"
+                                               style="height: 250px; resize: none;" th:value="${campaign.description}"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
+                                <input type="hidden" name="campId" th:value="${campaign.id}"/>
+                                <input type="hidden" th:name="${_csrf.parameterName}" 
+                                       th:value="${_csrf.token}"/>
                                 <button type="submit" class="btn btn-outline-danger btn-block bg m-1">Update
                                     Campaign</button>
                             </div>
