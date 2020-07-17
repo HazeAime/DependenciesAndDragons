@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.entities.Role;
 import com.dependencies.dragons.dnd.entities.User;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
@@ -16,7 +17,10 @@ import com.dependencies.dragons.dnd.repositories.RaceRepository;
 import com.dependencies.dragons.dnd.repositories.RoleRepository;
 import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,12 +70,15 @@ public class MainController {
     
     @GetMapping("createnewuser")
     public String createNewUser(Model model) {
-        model.addAttribute("roles", role.findAll());
+        List<Role> allRoles = role.findAll();
+        model.addAttribute("roles", allRoles.stream().filter(r -> !r.getRole().equals("ROLE_ADMIN")).collect(Collectors.toList()));
         return "createnewuser";
     }
     
     @PostMapping("createnewuser")
     public String createNewUser(User toAdd) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        toAdd.setPassword(encoder.encode(toAdd.getPassword()));
         user.save(toAdd);
         return "redirect:/login";
     }

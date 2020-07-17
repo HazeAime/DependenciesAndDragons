@@ -76,7 +76,7 @@ and open the template in the editor.
         </div>
         <div class="row">
             <div class="col">
-                <form action="createuser" method="POST">
+                <form action="createnewuser" method="POST">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     
                     <h3 class="border border-dark bg text-center" style="color: whitesmoke">Sign Up for an Account</h3>
@@ -88,14 +88,17 @@ and open the template in the editor.
                         <input type="text" id="userName" name="userName" />
                         <br />
                         <label for="password" style="color: whitesmoke;">Password: </label>
-                        <input type="text" id="password" name="password" />
+                        <input type="password" id="password" name="password" />
                         <br />
+                        <label for="confirmPassword" style="color: whitesmoke;">Confirm Password: </label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" />
                         <br />
                         <label for="role" style="color: whitesmoke">Role: </label>
                         <select name="role" id="roleSelect">
                             <option value="0">Select a Role</option>
                             <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>
+                        <br />
                         <br />
                         <button type="submit" class="btn btn-outline-danger col-md-4 bg m-1" id="createNewUser">Sign
                             Up</button>
