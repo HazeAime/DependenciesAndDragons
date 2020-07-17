@@ -119,7 +119,7 @@ public class PlayerController {
     
     @GetMapping("updatecharacter/{id}")
     public String updateCharacter(Model model, @PathVariable Integer id) {
-        model.addAttribute("character", dndChar.findById(id));
+        model.addAttribute("character", dndChar.findById(id).orElse(null));
         model.addAttribute("campaigns", campaign.findAll());
         model.addAttribute("alignments", align.findAll());
         model.addAttribute("classes", charClass.findAll());
