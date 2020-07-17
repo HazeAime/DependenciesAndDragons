@@ -5,7 +5,12 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
+import com.dependencies.dragons.dnd.daos.DndCharacterDao;
+import com.dependencies.dragons.dnd.entities.Alignment;
+import com.dependencies.dragons.dnd.entities.CharacterClass;
+import com.dependencies.dragons.dnd.entities.DndCampaign;
 import com.dependencies.dragons.dnd.entities.DndCharacter;
+import com.dependencies.dragons.dnd.entities.Race;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -18,6 +23,7 @@ import com.dependencies.dragons.dnd.repositories.SkillRepository;
 import com.dependencies.dragons.dnd.repositories.UserRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,6 +68,9 @@ public class PlayerController {
     @Autowired
     UserRepository user;
     
+    @Autowired
+    DndCharacterDao charDao;
+    
     @GetMapping("createcharacter")
     public String createCharacter(Model model) {
         model.addAttribute("campaigns", campaign.findAll());
@@ -75,7 +84,21 @@ public class PlayerController {
     }
     
     @PostMapping("createcharacter")
-    public String createCharacter(DndCharacter toAdd) {
+    public String createCharacter(HttpServletRequest request, DndCharacter toAdd) {
+        Integer classId = Integer.parseInt(request.getParameter("classId"));
+        CharacterClass cClass = charClass.findById(classId).orElse(null);
+        Integer alignmentId = Integer.parseInt(request.getParameter("alignmentId"));
+        Alignment cAlign = align.findById(alignmentId).orElse(null);
+        Integer raceId = Integer.parseInt(request.getParameter("raceId"));
+        Race cRace = race.findById(raceId).orElse(null);
+        Integer campaignId = Integer.parseInt(request.getParameter("campaignId"));
+        DndCampaign cCamp = campaign.findById(campaignId).orElse(null);
+        toAdd.setCharacterClass(cClass);
+        toAdd.setAlignment(cAlign);
+        toAdd.setCharacterRace(cRace);
+        toAdd.setCampaign(cCamp);
+        Integer newId = charDao.getNewId(toAdd);
+        toAdd.setId(newId);
         dndChar.save(toAdd);
         return "redirect:/characters";
     }
