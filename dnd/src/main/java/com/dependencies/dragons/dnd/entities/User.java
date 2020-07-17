@@ -5,6 +5,7 @@
  */
 package com.dependencies.dragons.dnd.entities;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -44,7 +46,21 @@ public class User {
             inverseJoinColumns = {
                 @JoinColumn(name = "roleId")})
     private Set<Role> roles;
+    
+    public User(){
+    
+    }
 
+    public User(UserVM vm) {
+        this.userName = vm.getUserName();
+        this.roles = new HashSet<>();
+        Role role = new Role();
+        role.setId(vm.getRoleId());
+        roles.add(role);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(vm.getPassword());
+        this.enabled = true;
+    }
     /**
      * @return the id
      */

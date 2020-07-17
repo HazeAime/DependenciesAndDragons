@@ -7,6 +7,7 @@ package com.dependencies.dragons.dnd.controllers;
 
 import com.dependencies.dragons.dnd.entities.Role;
 import com.dependencies.dragons.dnd.entities.User;
+import com.dependencies.dragons.dnd.entities.UserVM;
 import com.dependencies.dragons.dnd.repositories.AlignmentRepository;
 import com.dependencies.dragons.dnd.repositories.AttackOrSpellRepository;
 import com.dependencies.dragons.dnd.repositories.CharacterClassRepository;
@@ -76,9 +77,9 @@ public class MainController {
     }
     
     @PostMapping("createnewuser")
-    public String createNewUser(User toAdd) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        toAdd.setPassword(encoder.encode(toAdd.getPassword()));
+    public String createNewUser(UserVM vm) {
+        // TODO: Validate UserVM has valid data
+        User toAdd = new User(vm);
         user.save(toAdd);
         return "redirect:/login";
     }

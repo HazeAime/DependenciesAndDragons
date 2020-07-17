@@ -14,79 +14,23 @@ import java.util.Objects;
  */
 public class UserVM {
     
-    private int id;
-    private String role;
+    private int roleId;
     private String userName;
     private String password;
     private String confirmPassword;
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + Objects.hashCode(this.role);
-        hash = 41 * hash + Objects.hashCode(this.userName);
-        hash = 41 * hash + Objects.hashCode(this.password);
-        hash = 41 * hash + Objects.hashCode(this.confirmPassword);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UserVM other = (UserVM) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.role, other.role)) {
-            return false;
-        }
-        if (!Objects.equals(this.userName, other.userName)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (!Objects.equals(this.confirmPassword, other.confirmPassword)) {
-            return false;
-        }
-        return true;
+    /**
+     * @return the roleId
+     */
+    public int getRoleId() {
+        return roleId;
     }
 
     /**
-     * @return the id
+     * @param roleId the roleId to set
      */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the role
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * @param role the role to set
-     */
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     /**
@@ -130,4 +74,5 @@ public class UserVM {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+    
 }

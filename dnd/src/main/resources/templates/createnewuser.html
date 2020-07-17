@@ -93,8 +93,8 @@ and open the template in the editor.
                         <label for="confirmPassword" style="color: whitesmoke;">Confirm Password: </label>
                         <input type="password" id="confirmPassword" name="confirmPassword" />
                         <br />
-                        <label for="role" style="color: whitesmoke">Role: </label>
-                        <select name="role" id="roleSelect">
+                        <label for="roleId" style="color: whitesmoke">Role: </label>
+                        <select name="roleId" id="roleSelect">
                             <option value="0">Select a Role</option>
                             <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>
