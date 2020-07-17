@@ -23,5 +23,7 @@ public interface DndCharacterDao {
     public void updateCharacter(DndCharacter toEdit);
     
     public void deleteCharacter(DndCharacter toRemove);
+
+    public Integer getNewId(DndCharacter toAdd);
     
 }

@@ -78,35 +78,50 @@
                             <div class="row">
                                 <div class="col-3 offset-1" style="border: solid whitesmoke; text-align:center;">
                                     <h5 style="color: whitesmoke; font-weight: bold;">Character Name: </h5>
-                                    <input name="charName" placeholder="Character Name"></input>
+                                    <input name="characterName" placeholder="Character Name"></input>
                                 </div>
                                 <div class="col-7" style="border: solid whitesmoke; text-align:center;">
                                     <div class="row" style="color: whitesmoke;">
                                         <div class="col-4">
                                             <h6>Class: </h6>
-                                            <input placeholder="Class" size="10"></input>
+                                            <select id="classId" name="classId" class="form-control">
+                                                <option value="0">Class</option>
+                                                <option th:each="class : ${classes}" 
+                                                        th:value="${class.id}" 
+                                                        th:text="${class.name}"></option>
+                                            </select>
                                         </div>
                                         <div class="col-4">
                                             <h6>Level: </h6>
-                                            <input placeholder="Level" size="10"></input>
+                                            <input name="characterLvl" placeholder="Level" size="10"></input>
                                         </div>
                                         <div class="col-4">
                                             <h6>Player Name: </h6>
-                                            <input placeholder="Your Name" size="10"></input>
+                                            <input name="playerName" placeholder="Your Name" size="10"></input>
                                         </div>
                                     </div>
                                     <div class="row" style="color: whitesmoke;">
                                         <div class="col-4">
                                             <h6>Race: </h6>
-                                            <input placeholder="Race" size="10"></input>
+                                            <select id="raceId" name="raceId" class="form-control">
+                                                <option value="0">Race</option>
+                                                <option th:each="race : ${races}" 
+                                                        th:value="${race.id}" 
+                                                        th:text="${race.name}"></option>
+                                            </select>
                                         </div>
                                         <div class="col-4">
                                             <h6>Alignment: </h6>
-                                            <input placeholder="Alignment" size="10"></input>
+                                            <select id="alignmentId" name="alignmentId" class="form-control">
+                                                <option value="0">Alignment</option>
+                                                <option th:each="alignment : ${alignments}" 
+                                                        th:value="${alignment.id}" 
+                                                        th:text="${alignment.name}"></option>
+                                            </select>
                                         </div>
                                         <div class="col-4">
                                             <h6>Experience: </h6>
-                                            <input placeholder="Exp" size="10"></input>
+                                            <input name="xp" placeholder="Exp" size="10"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -142,48 +157,62 @@
                                     <div class="row">
                                         <div class="col-6" style="border: solid whitesmoke; color:whitesmoke; text-align: center">
                                             <h6>Saving Throws</h6>
-                                            <label for="stStr">Strength: </label>
-                                            <span name="stStr" th:text="${character.stStrength}">str</span><br/>
-                                            <label for="stDex">Dexterity: </label>
-                                            <span name="stDex" th:text="${character.stDexterity}">dex</span><br/>
-                                            <label for="stCon">Constitution: </label>
-                                            <span name="stCon" th:text="${character.stConstitution}">con</span><br/>
-                                            <label for="stInt">Intelligence: </label>
-                                            <span name="stInt" th:text="${character.stIntelligence}">int</span><br/>
-                                            <label for="stWis">Wisdom: </label>
-                                            <span name="stWis" th:text="${character.stWisdom}">wis</span><br/>
-                                            <label for="stCha">Charisma: </label>
-                                            <span name="stCha" th:text="${character.stCharisma}">cha</span>
+                                            <label for="stStrength">Strength: </label>
+                                            <input name="stStrength" placeholder="str" size="1"></input><br/>
+                                            <label for="stDexterity">Dexterity: </label>
+                                            <input name="stDexterity" placeholder="dex" size="1"></input><br/>
+                                            <label for="stConstitution">Constitution: </label>
+                                            <input name="stConstitution" placeholder="con" size="1"></input><br/>
+                                            <label for="stIntelligence">Intelligence: </label>
+                                            <input name="stIntelligence" placeholder="int" size="1"></input><br/>
+                                            <label for="stWisdom">Wisdom: </label>
+                                            <input name="stWisdom" placeholder="wis" size="1"></input><br/>
+                                            <label for="stCharisma">Charisma: </label>
+                                            <input name="stCharisma" placeholder="cha" size="1"></input>
                                         </div>
                                         <div class="col-6" style="border: solid whitesmoke; color:whitesmoke">
                                             <div class="col">
                                                 <h6>Armor Class: </h6>
-                                                <span th:text="${character.armorClass}">armor</span>
+                                                <input name="armorClass" placeholder="armor" size="2"></input>
                                             </div><br/>
                                             <div class="col">
                                                 <h6>Hit Die: </h6>
-                                                <span th:text="${character.hitDice}">die</span>
+                                                <input name="hitDice" placeholder="die" size="2"></input>
                                             </div><br/>
                                             <div class="col">
                                                 <h6>Money: </h6>
-                                                <span th:text="${character.money}">money</span>
+                                                <input name="money" value="0" size="2" readonly></input>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="border: solid whitesmoke; color:whitesmoke; text-align:center">
-                                            <h6>Associated Campaigns</h6>
-                                            <span th:text="${character.campaign.id}">Campaign Id</span>
+                                            <h6>Associated Campaign</h6>
+                                            <select id="campaignId" name="campaignId" class="form-control">
+                                                <option value="0">Select a Campaign</option>
+                                                <option th:each="campaign : ${campaigns}" 
+                                                        th:value="${campaign.id}" 
+                                                        th:text="${campaign.id}"></option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4" style="border: solid whitesmoke; color: whitesmoke; text-align:center">
                                     <h6>Backstory</h6>
-                                    <p th:text="${character.backstory}">backstory</p>
+                                    <textarea class="form-control m-1" style="height: 400px; resize: none;" name="backstory" placeholder="backstory"></textarea>
                                 </div>
                             </div>
-                        </form>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" th:name="${_csrf.parameterName}" 
+                                   th:value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn-outline-danger btn-block bg m-1">Create
+                                Character</button>
+                        </div>
+                    </div>
+                    </form>
+
                 </div>
                 <div class="col-3 text-center border border-dark bg">
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
