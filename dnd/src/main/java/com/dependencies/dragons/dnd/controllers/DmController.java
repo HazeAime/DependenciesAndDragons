@@ -90,7 +90,7 @@ public class DmController {
 
     @GetMapping("campaigns")
     public String displayAllCampaigns(Model model) {
-        //List<DndCampaign> allCampaigns = campaignRepo.findAll();
+        //get signed in user's username
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
         if (principal instanceof UserDetails) {
@@ -98,7 +98,13 @@ public class DmController {
         } else {
             username = principal.toString();
         }
-        List<DndCampaign> allCampaigns = campaignDao.findCampaignsByUsername(username);
+        //if admin can see all campaigns
+        List<DndCampaign> allCampaigns = new ArrayList<>();
+        //if () {
+        //    allCampaigns = campaignRepo.findAll();
+        //} else {
+            allCampaigns = campaignDao.findCampaignsByUsername(username);
+        //}
         List<DndCampaign> approvedList = new ArrayList<>();
         for (int i = 0; i < allCampaigns.size(); i++) {
             if (allCampaigns.get(i).isApproval() == true) {
