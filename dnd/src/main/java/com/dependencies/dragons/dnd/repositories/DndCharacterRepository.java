@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DndCharacterRepository extends JpaRepository<DndCharacter, Integer> {
     
-    List<DndCharacter> findByUserId(int userId);
+    List<DndCharacter> findByUser(User user);
     
 }

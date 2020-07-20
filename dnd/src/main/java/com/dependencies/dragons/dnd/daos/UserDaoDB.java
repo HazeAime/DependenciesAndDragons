@@ -72,7 +72,7 @@ public class UserDaoDB implements UserDao {
                 + "= ur.roleid WHERE userid = ?", new RoleMapper(), id));
     }
 
-    private static class UserMapper implements RowMapper<User> {
+    public static class UserMapper implements RowMapper<User> {
 
         @Override
         public User mapRow(ResultSet rs, int i) throws SQLException {

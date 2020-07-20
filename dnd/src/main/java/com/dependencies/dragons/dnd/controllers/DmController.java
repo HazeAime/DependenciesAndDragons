@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.dependencies.dragons.dnd.daos.DndCampaignDao;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -47,7 +49,7 @@ public class DmController {
     CharacterClassRepository charClass;
 
     @Autowired
-    DndCampaignRepository campaign;
+    DndCampaignRepository campaignRepo;
 
     @Autowired
     DndCharacterRepository dndChar;
@@ -68,7 +70,7 @@ public class DmController {
     UserRepository user;
 
     @Autowired
-    DndCampaignDao campDao;
+    DndCampaignDao campaignDao;
 
     @GetMapping("createcampaign")
     public String createCampaign(Model model) {
@@ -80,17 +82,23 @@ public class DmController {
     public String createCampaign(DndCampaign toAdd, HttpServletRequest request) {
         String dmId = request.getParameter("dmId");
         toAdd.setUser(user.findById(Integer.parseInt(dmId)).orElse(null));
-        Integer newId = campDao.getNewId(toAdd);
+        Integer newId = campaignDao.getNewId(toAdd);
         toAdd.setId(newId);
-        campaign.save(toAdd);
+        campaignRepo.save(toAdd);
         return "redirect:/campaigns";
     }
 
     @GetMapping("campaigns")
-    public String displayAllCampaigns(Model model, HttpServletRequest request) {
-        //List<DndCampaign> allCampaigns = campaign.findAll();
-        String dmId = request.getParameter("dmId");
-        List<DndCampaign> allCampaigns = campaign.findByUser(user.findById(Integer.parseInt(dmId)).orElse(null));
+    public String displayAllCampaigns(Model model) {
+        //List<DndCampaign> allCampaigns = campaignRepo.findAll();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        List<DndCampaign> allCampaigns = campaignDao.findCampaignsByUsername(username);
         List<DndCampaign> approvedList = new ArrayList<>();
         for (int i = 0; i < allCampaigns.size(); i++) {
             if (allCampaigns.get(i).isApproval() == true) {
@@ -103,7 +111,7 @@ public class DmController {
 
     @GetMapping("updatecampaign/{id}")
     public String updateCampaign(Model model, @PathVariable Integer id) {
-        DndCampaign camp = campaign.findById(id).orElse(null);
+        DndCampaign camp = campaignRepo.findById(id).orElse(null);
         model.addAttribute("campaign", camp);
         List<User> userList = user.findAll();
 //        List<User> dmUsers = new ArrayList <>();
@@ -126,21 +134,21 @@ public class DmController {
         String id = request.getParameter("campId");
         toUpdate.setId(Integer.parseInt(id));
         toUpdate.setApproval(true);
-        campDao.editCampaign(toUpdate);
-        campaign.save(toUpdate);
+        campaignDao.editCampaign(toUpdate);
+        campaignRepo.save(toUpdate);
         return "redirect:/campaigns";
     }
 
     @GetMapping("campaigndetails/{id}")
     public String displayCampaignDetails(Model model, @PathVariable Integer id) {
-        DndCampaign camp = campaign.findById(id).orElse(null);
+        DndCampaign camp = campaignRepo.findById(id).orElse(null);
         model.addAttribute("campaign", camp);
         return "campaigndetails";
     }
 
-//    @GetMapping("campaign/characters")
+//    @GetMapping("campaignRepo/characters")
 //    public String viewCharacters(Model model) {
-//        model.addAttribute("campaign", campaign)
+//        model.addAttribute("campaignRepo", campaignRepo)
 //        return "";
 //    }
 //    

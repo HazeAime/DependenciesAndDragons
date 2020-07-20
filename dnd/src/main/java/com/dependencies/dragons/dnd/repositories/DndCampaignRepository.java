@@ -6,9 +6,9 @@
 package com.dependencies.dragons.dnd.repositories;
 
 import com.dependencies.dragons.dnd.entities.DndCampaign;
-import com.dependencies.dragons.dnd.entities.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,7 +17,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DndCampaignRepository extends JpaRepository<DndCampaign, Integer> {
-    
-    List<DndCampaign> findByUser(User user);
-    
+//    
+//    @Query(value = "select c from DndCampaign c join User on c.userId = User.id "
+//            + "where User.username = ?1", nativeQuery = true)
+//    List<Object[]> findByUserName(String username);
+//    
 }

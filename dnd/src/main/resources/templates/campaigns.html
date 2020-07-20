@@ -87,7 +87,7 @@ and open the template in the editor.
                             <tbody>
                                 <tr th:each="campaign : ${campaigns}">
                                     <td th:text="${campaign.id}" style="color: whitesmoke">ID</td>
-                                    <td th:text="${campaign.dmAffiliated.userName}" style="color: whitesmoke">DM</td>
+                                    <td th:text="${campaign.user.userName}" style="color: whitesmoke">DM</td>
                                     <td><a class="btn-outline-danger " href="#" th:href="${'/campaigndetails/' + campaign.id}">Details</a></td>
                                     <td><a class="btn-outline-danger " href="#" th:href="${'/updatecampaign/' + campaign.id}">Edit</a></td>
                                     <td><a class="btn-outline-danger " href="#" th:href="${'/deletecampaign/' + campaign.id}">Delete</a></td>
@@ -96,7 +96,6 @@ and open the template in the editor.
                         </table>
                     </div>
                 </div>
-
                 <div class="col-3 text-center border border-dark bg">
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER')">
                         <a href="/createcharacter" class="btn btn-outline-danger btn-md m-3">Create New Character</a>

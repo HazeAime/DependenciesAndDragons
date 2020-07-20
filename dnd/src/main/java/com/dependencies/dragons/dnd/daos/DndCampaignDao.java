@@ -17,4 +17,6 @@ public interface DndCampaignDao {
     public Integer getNewId(DndCampaign toAdd);
     
     public void editCampaign(DndCampaign toEdit);
+    
+    public List<DndCampaign> findCampaignsByUsername(String username);
 }
