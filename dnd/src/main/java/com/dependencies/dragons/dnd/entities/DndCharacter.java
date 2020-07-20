@@ -107,55 +107,43 @@ public class DndCharacter {
     @JoinColumn(name = "raceId")
     private Race characterRace;
     
-    @ManyToMany
-    @JoinTable(name = "Character_Skill", 
-            joinColumns = {@JoinColumn(name = "characterId")},
-            inverseJoinColumns = {@JoinColumn(name = "skillId")})
-    private List<Skill> allSkills;
-    
-    @ManyToMany
-    @JoinTable(name = "Character_Item", 
-            joinColumns = {@JoinColumn(name = "characterId")},
-            inverseJoinColumns = {@JoinColumn(name = "itemId")})
-    private List<Item> allItems;
-    
-    @ManyToMany
-    @JoinTable(name = "Character_AttackOrSpell", 
-            joinColumns = {@JoinColumn(name = "characterId")},
-            inverseJoinColumns = {@JoinColumn(name = "attackOrSpellId")})
-    private List<AttackOrSpell> allAttackOrSpells;
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private User user;
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.campaign);
-        hash = 29 * hash + Objects.hashCode(this.characterName);
-        hash = 29 * hash + Objects.hashCode(this.playerName);
-        hash = 29 * hash + Objects.hashCode(this.alignment);
-        hash = 29 * hash + Objects.hashCode(this.xp);
-        hash = 29 * hash + Objects.hashCode(this.characterLvl);
-        hash = 29 * hash + Objects.hashCode(this.characterClass);
-        hash = 29 * hash + Objects.hashCode(this.strength);
-        hash = 29 * hash + Objects.hashCode(this.dexterity);
-        hash = 29 * hash + Objects.hashCode(this.constitution);
-        hash = 29 * hash + Objects.hashCode(this.intelligence);
-        hash = 29 * hash + Objects.hashCode(this.wisdom);
-        hash = 29 * hash + Objects.hashCode(this.stStrength);
-        hash = 29 * hash + Objects.hashCode(this.stDexterity);
-        hash = 29 * hash + Objects.hashCode(this.stConstitution);
-        hash = 29 * hash + Objects.hashCode(this.stIntelligence);
-        hash = 29 * hash + Objects.hashCode(this.stWisdom);
-        hash = 29 * hash + Objects.hashCode(this.stCharisma);
-        hash = 29 * hash + Objects.hashCode(this.charisma);
-        hash = 29 * hash + Objects.hashCode(this.money);
-        hash = 29 * hash + Objects.hashCode(this.backstory);
-        hash = 29 * hash + Objects.hashCode(this.hitDice);
-        hash = 29 * hash + Objects.hashCode(this.armorClass);
-        hash = 29 * hash + Objects.hashCode(this.characterRace);
-        hash = 29 * hash + Objects.hashCode(this.allSkills);
-        hash = 29 * hash + Objects.hashCode(this.allItems);
-        hash = 29 * hash + Objects.hashCode(this.allAttackOrSpells);
+        hash = 83 * hash + (this.approval ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.campaign);
+        hash = 83 * hash + Objects.hashCode(this.characterName);
+        hash = 83 * hash + Objects.hashCode(this.playerName);
+        hash = 83 * hash + Objects.hashCode(this.alignment);
+        hash = 83 * hash + Objects.hashCode(this.xp);
+        hash = 83 * hash + Objects.hashCode(this.characterLvl);
+        hash = 83 * hash + Objects.hashCode(this.characterClass);
+        hash = 83 * hash + Objects.hashCode(this.strength);
+        hash = 83 * hash + Objects.hashCode(this.dexterity);
+        hash = 83 * hash + Objects.hashCode(this.constitution);
+        hash = 83 * hash + Objects.hashCode(this.intelligence);
+        hash = 83 * hash + Objects.hashCode(this.wisdom);
+        hash = 83 * hash + Objects.hashCode(this.stStrength);
+        hash = 83 * hash + Objects.hashCode(this.stDexterity);
+        hash = 83 * hash + Objects.hashCode(this.stConstitution);
+        hash = 83 * hash + Objects.hashCode(this.stIntelligence);
+        hash = 83 * hash + Objects.hashCode(this.stWisdom);
+        hash = 83 * hash + Objects.hashCode(this.stCharisma);
+        hash = 83 * hash + Objects.hashCode(this.charisma);
+        hash = 83 * hash + Objects.hashCode(this.money);
+        hash = 83 * hash + Objects.hashCode(this.backstory);
+        hash = 83 * hash + Objects.hashCode(this.hitDice);
+        hash = 83 * hash + Objects.hashCode(this.armorClass);
+        hash = 83 * hash + Objects.hashCode(this.characterRace);
+        hash = 83 * hash + Objects.hashCode(this.user);
+        hash = 83 * hash + Objects.hashCode(this.allSkills);
+        hash = 83 * hash + Objects.hashCode(this.allItems);
+        hash = 83 * hash + Objects.hashCode(this.allAttackOrSpells);
         return hash;
     }
 
@@ -171,6 +159,9 @@ public class DndCharacter {
             return false;
         }
         final DndCharacter other = (DndCharacter) obj;
+        if (this.approval != other.approval) {
+            return false;
+        }
         if (!Objects.equals(this.characterName, other.characterName)) {
             return false;
         }
@@ -246,6 +237,9 @@ public class DndCharacter {
         if (!Objects.equals(this.characterRace, other.characterRace)) {
             return false;
         }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
         if (!Objects.equals(this.allSkills, other.allSkills)) {
             return false;
         }
@@ -257,6 +251,24 @@ public class DndCharacter {
         }
         return true;
     }
+    
+    @ManyToMany
+    @JoinTable(name = "Character_Skill", 
+            joinColumns = {@JoinColumn(name = "characterId")},
+            inverseJoinColumns = {@JoinColumn(name = "skillId")})
+    private List<Skill> allSkills;
+    
+    @ManyToMany
+    @JoinTable(name = "Character_Item", 
+            joinColumns = {@JoinColumn(name = "characterId")},
+            inverseJoinColumns = {@JoinColumn(name = "itemId")})
+    private List<Item> allItems;
+    
+    @ManyToMany
+    @JoinTable(name = "Character_AttackOrSpell", 
+            joinColumns = {@JoinColumn(name = "characterId")},
+            inverseJoinColumns = {@JoinColumn(name = "attackOrSpellId")})
+    private List<AttackOrSpell> allAttackOrSpells;
 
     /**
      * @return the id
@@ -662,6 +674,20 @@ public class DndCharacter {
      */
     public void setApproval(boolean approval) {
         this.approval = approval;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
     }
     
     
