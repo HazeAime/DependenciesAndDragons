@@ -81,7 +81,7 @@ public class DmController {
     @PostMapping("createcampaign")
     public String createCampaign(DndCampaign toAdd, HttpServletRequest request) {
         String dmId = request.getParameter("dmId");
-        toAdd.setUser(user.findById(Integer.parseInt(dmId)).orElse(null));
+        toAdd.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
         Integer newId = campaignDao.getNewId(toAdd);
         toAdd.setId(newId);
         campaignRepo.save(toAdd);
@@ -130,7 +130,7 @@ public class DmController {
         String campMap = request.getParameter("campaignMap");
         toUpdate.setMap(campMap);
         String dmId = request.getParameter("dm");
-        toUpdate.setUser(user.findById(Integer.parseInt(dmId)).orElse(null));
+        toUpdate.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
         String id = request.getParameter("campId");
         toUpdate.setId(Integer.parseInt(id));
         toUpdate.setApproval(true);

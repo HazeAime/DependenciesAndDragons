@@ -41,7 +41,7 @@ public class DndCampaignDaoDB implements DndCampaignDao {
         template.update(editCamp,
                 toEdit.getDescription(),
                 toEdit.isApproval(),
-                toEdit.getUser().getId(),
+                toEdit.getDmAffiliated().getId(),
                 toEdit.getMap(),
                 toEdit.getId());
     }
@@ -58,7 +58,7 @@ public class DndCampaignDaoDB implements DndCampaignDao {
 
     private void associateUser(List<DndCampaign> campaigns) {
         for (DndCampaign campaign: campaigns) {
-            campaign.setUser(getUserForCampaign(campaign.getId()));
+            campaign.setDmAffiliated(getUserForCampaign(campaign.getId()));
         }
     }
 
