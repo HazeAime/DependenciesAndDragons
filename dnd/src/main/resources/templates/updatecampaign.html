@@ -86,7 +86,10 @@ and open the template in the editor.
                                 <label for="dm" style="color: whitesmoke">Campaign DM: </label>
                                 <select name="dm" id="dmSelect">
                                     <option value="0">Select a DM</option>
-                                    <option th:each="dm : ${users}" th:value="${dm.id}" th:text="${dm.userName}"></option>
+                                    <option th:each="dm : ${users}" 
+                                            th:value="${dm.id}" 
+                                            th:text="${dm.userName}"
+                                            th:selected="${users.contains(dm)}"></option>
                                 </select>
                             </div>
                             <div class="row">

@@ -74,7 +74,7 @@
                 <div class="col">
                     <h3 class="border border-dark bg text-center" style="color: whitesmoke">Create New Character</h3>
                     <div class="border border-dark bg" style="height:600px; overflow-y: scroll; overflow-x: hidden; ">
-                        <form action="createcharacter" method="POST">
+                        <form action="updatecharacter" method="POST">
                             <div class="row">
                                 <div class="col-3 offset-1" style="border: solid whitesmoke; text-align:center;">
                                     <h5 style="color: whitesmoke; font-weight: bold;">Character Name: </h5>
@@ -88,17 +88,17 @@
                                                 <option value="0">Class</option>
                                                 <option th:each="class : ${classes}" 
                                                         th:value="${class.id}" 
-                                                        th:selected="${character.characterClass.id}"
-                                                        th:text="${class.name}"></option>
+                                                        th:text="${class.name}"
+                                                        th:selected="${class.id == character.characterClass.id}"></option>
                                             </select>
                                         </div>
                                         <div class="col-4">
                                             <h6>Level: </h6>
-                                            <input name="characterLvl" placeholder="Level" size="10"></input>
+                                            <input name="characterLvl" th:value="${character.characterLvl}" size="10"></input>
                                         </div>
                                         <div class="col-4">
                                             <h6>Player Name: </h6>
-                                            <input name="playerName" placeholder="Your Name" size="10"></input>
+                                            <input name="playerName" th:value="${character.playerName}" size="10"></input>
                                         </div>
                                     </div>
                                     <div class="row" style="color: whitesmoke;">
@@ -108,7 +108,8 @@
                                                 <option value="0">Race</option>
                                                 <option th:each="race : ${races}" 
                                                         th:value="${race.id}" 
-                                                        th:text="${race.name}"></option>
+                                                        th:text="${race.name}"
+                                                        th:selected="${race.id == character.characterRace.id}"></option>
                                             </select>
                                         </div>
                                         <div class="col-4">
@@ -117,12 +118,13 @@
                                                 <option value="0">Alignment</option>
                                                 <option th:each="alignment : ${alignments}" 
                                                         th:value="${alignment.id}" 
-                                                        th:text="${alignment.name}"></option>
+                                                        th:text="${alignment.name}"
+                                                        th:selected="${alignment.id == character.alignment.id}"></option>
                                             </select>
                                         </div>
                                         <div class="col-4">
                                             <h6>Experience: </h6>
-                                            <input name="xp" placeholder="Exp" size="10"></input>
+                                            <input name="xp" th:value="${character.xp}" size="10"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -131,27 +133,27 @@
                                 <div class="col-2 offset-1" style="border: solid whitesmoke; color: whitesmoke; text-align: center">
                                     <div class="col">
                                         <h6>Strength: </h6>
-                                        <input name="strength" placeholder="Str" size="5"></input>
+                                        <input name="strength" th:value="${character.strength}" size="5"></input>
                                     </div><br/>
                                     <div class="col">
                                         <h6>Dexterity: </h6>
-                                        <input name="dexterity" placeholder="Dex" size="5"></input>
+                                        <input name="dexterity" th:value="${character.dexterity}" size="5"></input>
                                     </div><br/>
                                     <div class="col">
                                         <h6>Constitution: </h6>
-                                        <input name="constitution" placeholder="Con" size="5"></input>
+                                        <input name="constitution" th:value="${character.constitution}" size="5"></input>
                                     </div><br/>
                                     <div class="col">
                                         <h6>Intelligence </h6>
-                                        <input name="intelligence" placeholder="Int" size="5"></input>
+                                        <input name="intelligence" th:value="${character.intelligence}" size="5"></input>
                                     </div><br/>
                                     <div class="col">
                                         <h6>Wisdom: </h6>
-                                        <input name="wisdom" placeholder="Wis" size="5"></input>
+                                        <input name="wisdom" th:value="${character.wisdom}" size="5"></input>
                                     </div><br/>
                                     <div class="col">
                                         <h6>Charisma: </h6>
-                                        <input name="charisma" placeholder="Cha" size="5"></input>
+                                        <input name="charisma" th:value="${character.charisma}" size="5"></input>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -159,30 +161,30 @@
                                         <div class="col-6" style="border: solid whitesmoke; color:whitesmoke; text-align: center">
                                             <h6>Saving Throws</h6>
                                             <label for="stStrength">Strength: </label>
-                                            <input name="stStrength" placeholder="str" size="1"></input><br/>
+                                            <input name="stStrength" th:value="${character.stStrength}" size="1"></input><br/>
                                             <label for="stDexterity">Dexterity: </label>
-                                            <input name="stDexterity" placeholder="dex" size="1"></input><br/>
+                                            <input name="stDexterity" th:value="${character.stDexterity}" size="1"></input><br/>
                                             <label for="stConstitution">Constitution: </label>
-                                            <input name="stConstitution" placeholder="con" size="1"></input><br/>
+                                            <input name="stConstitution" th:value="${character.stConstitution}" size="1"></input><br/>
                                             <label for="stIntelligence">Intelligence: </label>
-                                            <input name="stIntelligence" placeholder="int" size="1"></input><br/>
+                                            <input name="stIntelligence" th:value="${character.stIntelligence}" size="1"></input><br/>
                                             <label for="stWisdom">Wisdom: </label>
-                                            <input name="stWisdom" placeholder="wis" size="1"></input><br/>
+                                            <input name="stWisdom" th:value="${character.stWisdom}" size="1"></input><br/>
                                             <label for="stCharisma">Charisma: </label>
-                                            <input name="stCharisma" placeholder="cha" size="1"></input>
+                                            <input name="stCharisma" th:value="${character.stCharisma}" size="1"></input>
                                         </div>
                                         <div class="col-6" style="border: solid whitesmoke; color:whitesmoke">
                                             <div class="col">
                                                 <h6>Armor Class: </h6>
-                                                <input name="armorClass" placeholder="armor" size="2"></input>
+                                                <input name="armorClass" th:value="${character.armorClass}" size="2"></input>
                                             </div><br/>
                                             <div class="col">
                                                 <h6>Hit Die: </h6>
-                                                <input name="hitDice" placeholder="die" size="2"></input>
+                                                <input name="hitDice" th:value="${character.hitDice}" size="2"></input>
                                             </div><br/>
                                             <div class="col">
                                                 <h6>Money: </h6>
-                                                <input name="money" value="0" size="2" readonly></input>
+                                                <input name="money" th:value="${character.money}" size="2" readonly></input>
                                             </div>
                                         </div>
                                     </div>
@@ -193,14 +195,15 @@
                                                 <option value="0">Select a Campaign</option>
                                                 <option th:each="campaign : ${campaigns}" 
                                                         th:value="${campaign.id}" 
-                                                        th:text="${campaign.id}"></option>
+                                                        th:text="${campaign.id}"
+                                                        th:selected="${campaign.id == character.campaign.id}"></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4" style="border: solid whitesmoke; color: whitesmoke; text-align:center">
                                     <h6>Backstory</h6>
-                                    <textarea class="form-control m-1" style="height: 400px; resize: none;" name="backstory" placeholder="backstory"></textarea>
+                                    <textarea class="form-control m-1" style="height: 400px; resize: none;" name="backstory" th:text="${character.backstory}"></textarea>
                                 </div>
                             </div>
                     </div>
@@ -208,7 +211,9 @@
                         <div class="col">
                             <input type="hidden" th:name="${_csrf.parameterName}" 
                                    th:value="${_csrf.token}"/>
-                            <button type="submit" class="btn btn-outline-danger btn-block bg m-1">Create
+                            <input type="hidden" th:name="${character.id}" 
+                                   th:value="${character.id}"/>
+                            <button type="submit" class="btn btn-outline-danger btn-block bg m-1">Update
                                 Character</button>
                         </div>
                     </div>

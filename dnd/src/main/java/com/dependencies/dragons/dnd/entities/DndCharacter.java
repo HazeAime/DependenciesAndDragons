@@ -108,7 +108,7 @@ public class DndCharacter {
     private Race characterRace;
     
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private User user;
 
     @Override
