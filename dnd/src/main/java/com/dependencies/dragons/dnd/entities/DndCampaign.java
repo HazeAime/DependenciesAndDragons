@@ -30,7 +30,7 @@ public class DndCampaign {
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.map);
         hash = 97 * hash + Objects.hashCode(this.description);
-        hash = 97 * hash + Objects.hashCode(this.dmAffiliated);
+        hash = 97 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -58,7 +58,7 @@ public class DndCampaign {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.dmAffiliated, other.dmAffiliated)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         return true;
@@ -79,9 +79,7 @@ public class DndCampaign {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User dmAffiliated;
-
-
+    private User user;
     
     /**
      * @return the id
@@ -126,17 +124,17 @@ public class DndCampaign {
     }
 
     /**
-     * @return the dmAffiliated
+     * @return the user
      */
-    public User getDmAffiliated() {
-        return dmAffiliated;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param dmAffiliated the dmAffiliated to set
+     * @param user the user to set
      */
-    public void setDmAffiliated(User dmAffiliated) {
-        this.dmAffiliated = dmAffiliated;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

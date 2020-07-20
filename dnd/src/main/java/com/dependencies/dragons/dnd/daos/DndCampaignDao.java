@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author siessejordan
  */
-public interface dndCampaignDao {
+public interface DndCampaignDao {
 
     public Integer getNewId(DndCampaign toAdd);
     

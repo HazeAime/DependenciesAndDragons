@@ -16,11 +16,12 @@ import org.springframework.stereotype.Component;
  * @author bkb
  */
 @Component
-public class DndCampaignDaoDB implements dndCampaignDao {
+public class DndCampaignDaoDB implements DndCampaignDao {
 
     @Autowired
     JdbcTemplate template;
 
+    @Override
     @Transactional
     public Integer getNewId(DndCampaign toAdd) {
 
@@ -36,7 +37,7 @@ public class DndCampaignDaoDB implements dndCampaignDao {
         template.update(editCamp,
                 toEdit.getDescription(),
                 toEdit.isApproval(),
-                toEdit.getDmAffiliated().getId(),
+                toEdit.getUser().getId(),
                 toEdit.getMap(),
                 toEdit.getId());
     }

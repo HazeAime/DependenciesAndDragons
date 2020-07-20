@@ -5,7 +5,6 @@
  */
 package com.dependencies.dragons.dnd.controllers;
 
-import com.dependencies.dragons.dnd.daos.dndCampaignDao;
 import com.dependencies.dragons.dnd.entities.DndCampaign;
 import com.dependencies.dragons.dnd.entities.DndCharacter;
 import com.dependencies.dragons.dnd.entities.User;
@@ -29,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.dependencies.dragons.dnd.daos.DndCampaignDao;
 
 /**
  *
@@ -68,7 +68,7 @@ public class DmController {
     UserRepository user;
 
     @Autowired
-    dndCampaignDao campDao;
+    DndCampaignDao campDao;
 
     @GetMapping("createcampaign")
     public String createCampaign(Model model) {
@@ -79,7 +79,7 @@ public class DmController {
     @PostMapping("createcampaign")
     public String createCampaign(DndCampaign toAdd, HttpServletRequest request) {
         String dmId = request.getParameter("dmId");
-        toAdd.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
+        toAdd.setUser(user.findById(Integer.parseInt(dmId)).orElse(null));
         Integer newId = campDao.getNewId(toAdd);
         toAdd.setId(newId);
         campaign.save(toAdd);
@@ -87,8 +87,10 @@ public class DmController {
     }
 
     @GetMapping("campaigns")
-    public String displayAllCampaigns(Model model) {
-        List<DndCampaign> allCampaigns = campaign.findAll();
+    public String displayAllCampaigns(Model model, HttpServletRequest request) {
+        //List<DndCampaign> allCampaigns = campaign.findAll();
+        String dmId = request.getParameter("dmId");
+        List<DndCampaign> allCampaigns = campaign.findByUser(user.findById(Integer.parseInt(dmId)).orElse(null));
         List<DndCampaign> approvedList = new ArrayList<>();
         for (int i = 0; i < allCampaigns.size(); i++) {
             if (allCampaigns.get(i).isApproval() == true) {
@@ -110,7 +112,7 @@ public class DmController {
 //                dmUsers.add(u);
 //            }
 //        }
-        
+
         model.addAttribute("users", userList);
         return "updatecampaign";
     }
@@ -120,7 +122,7 @@ public class DmController {
         String campMap = request.getParameter("campaignMap");
         toUpdate.setMap(campMap);
         String dmId = request.getParameter("dm");
-        toUpdate.setDmAffiliated(user.findById(Integer.parseInt(dmId)).orElse(null));
+        toUpdate.setUser(user.findById(Integer.parseInt(dmId)).orElse(null));
         String id = request.getParameter("campId");
         toUpdate.setId(Integer.parseInt(id));
         toUpdate.setApproval(true);

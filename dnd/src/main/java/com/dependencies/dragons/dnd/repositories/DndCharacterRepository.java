@@ -6,6 +6,8 @@
 package com.dependencies.dragons.dnd.repositories;
 
 import com.dependencies.dragons.dnd.entities.DndCharacter;
+import com.dependencies.dragons.dnd.entities.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DndCharacterRepository extends JpaRepository<DndCharacter, Integer> {
     
-    //List<DndCharacter> findByDndCampaignAndUser()
+    List<DndCharacter> findByUserId(int userId);
     
 }
