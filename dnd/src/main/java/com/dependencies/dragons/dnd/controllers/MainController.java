@@ -21,6 +21,7 @@ import com.dependencies.dragons.dnd.repositories.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,55 +34,69 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class MainController {
-    
+
     @Autowired
     AlignmentRepository align;
-    
-    @Autowired 
+
+    @Autowired
     AttackOrSpellRepository attkOrSpl;
-    
+
     @Autowired
     CharacterClassRepository charClass;
-    
+
     @Autowired
     DndCampaignRepository campaign;
-    
+
     @Autowired
     DndCharacterRepository dndChar;
-    
+
     @Autowired
     ItemRepository item;
-    
+
     @Autowired
     RaceRepository race;
-    
+
     @Autowired
     RoleRepository role;
-    
+
     @Autowired
     SkillRepository skill;
-    
+
     @Autowired
     UserRepository user;
-    
+
     @GetMapping("/")
-    public String displayHomepage() {   
+    public String displayHomepage() {
         return "home";
     }
-    
+
     @GetMapping("createnewuser")
     public String createNewUser(Model model) {
         List<Role> allRoles = role.findAll();
         model.addAttribute("roles", allRoles.stream().filter(r -> !r.getRole().equals("ROLE_ADMIN")).collect(Collectors.toList()));
+        model.addAttribute("isValid", true);
         return "createnewuser";
     }
-    
+
     @PostMapping("createnewuser")
-    public String createNewUser(UserVM vm) {
-        // TODO: Validate UserVM has valid data
-        User toAdd = new User(vm);
-        user.save(toAdd);
-        return "redirect:/login";
+    public String createNewUser(Model model, UserVM vm) {
+        List<Role> allRoles = role.findAll();
+        model.addAttribute("roles", allRoles.stream().filter(r -> !r.getRole().equals("ROLE_ADMIN")).collect(Collectors.toList()));
+        if (!vm.getPassword().equals(vm.getConfirmPassword())) {
+            model.addAttribute("isValid", false);
+            model.addAttribute("errorMessage", "Passwords must be identical");
+            return "createnewuser";
+        } else {
+            User toAdd = new User(vm);
+            try {
+                user.save(toAdd);
+            }catch(DataIntegrityViolationException ex){
+                model.addAttribute("isValid", false);
+                model.addAttribute("errorMessage", "Username already taken");
+                return "createnewuser";
+            }
+            return "redirect:/login";
+        }
     }
-    
+
 }
