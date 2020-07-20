@@ -13,17 +13,9 @@ import java.util.List;
  * @author siessejordan
  */
 public interface DndCharacterDao {
-    
-    public DndCharacter createCharacter();
-    
-    public DndCharacter getCharacterById(int id);
-    
-    public List<DndCharacter> getAllCharacters();
-    
-    public void updateCharacter(DndCharacter toEdit);
-    
-    public void deleteCharacter(DndCharacter toRemove);
 
     public Integer getNewId(DndCharacter toAdd);
+    
+    public List<DndCharacter> findCharactersByUsername(String username);
     
 }
